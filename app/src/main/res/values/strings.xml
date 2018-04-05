@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">EMarket POS</string>
+    <string name="title_bar">ELECTRONIC MARKET SYSTEM</string>
+    <string name="lblUsername">Username</string>
+    <string name="lblPassword">Password</string>
+    <string name="lblBtnLogin">LOGIN</string>
+    <string name="logoDesc">SPC Logo</string>
+    <string name="toolbarTitleMenu">CHOOSE TRANSACTION</string>
+    <string name="lblAmb">AMBULANT COLLECTION</string>
+    <string name="lblStall">STALL COLLECTION</string>
+    <string name="lblName">Firstname Lastname</string>
+    <string name="userIcon">user_icon</string>
+    <string name="stallCol">STALL COLLECTION</string>
+    <string name="ambCol">AMBULANT COLLECTION</string>
+    <string name="btnPrintRec">PRINT RECEIPT</string>
+    <string name="lblOwnerName">Name:</string>
+    <string name="lblNatBus">Nature of Business:</string>
+    <string name="lblAmt">Amount to pay:</string>
+    <string name="lblStallNo">Stall number:</string>
+    <string name="lblStallOwn">Name of Owner:</string>
+    <string name="lblStallBusName">Business Name:</string>
+    <string name="lblAmbList">Ambulant Search</string>
+    <string name="lblStallList">Stall Search</string>
+    <string name="hintSearch">Search</string>
+    <string name="hintSearchAmbulant">Search by Name</string>
+    <string name="hintSearchStall">Search by Stall No.</string>
+    <string name="btnSearch">Search</string>
+    <string name="btnProceed">Proceed</string>
+    <string name="btnResetSearch">Reset</string>
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
+</resources>
