@@ -2,9 +2,8 @@ package com.pylon.emarketpos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.pylon.emarketpos.controllers.LoginFrag;
+import com.pylon.emarketpos.controllers.*;
 
 public class MainView extends AppCompatActivity{
     @Override
@@ -16,6 +15,7 @@ public class MainView extends AppCompatActivity{
                 return;
             }
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFrag(),null).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.StatToolbar, new ToolbarFrag()).commit();
         }
     }
 }
