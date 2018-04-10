@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -24,9 +24,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
         android:text="@string/title_bar"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/colorBlack"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -37,9 +38,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="20dp"
         android:contentDescription="@string/logoDesc"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,11 +49,13 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
-        android:layout_height="388dp"
+        android:layout_height="428dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_container"
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
@@ -60,24 +63,24 @@
         android:id="@+id/user_container"
         android:layout_width="0dp"
         android:layout_height="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_container"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StatToolbar">
 
     </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/StatToolbar"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:background="@color/colorBlack"
-        app:layout_constraintBottom_toTopOf="@+id/user_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
     </RelativeLayout>
 
