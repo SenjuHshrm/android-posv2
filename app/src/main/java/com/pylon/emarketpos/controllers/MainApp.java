@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
-import com.pylon.emarketpos.tasks.GetInfo;
+import com.pylon.emarketpos.tasks.GetList;
 
 public class MainApp extends Fragment implements View.OnClickListener{
     public MainApp() {
@@ -30,10 +29,10 @@ public class MainApp extends Fragment implements View.OnClickListener{
     public void onClick(View v){
         switch(v.getId()){
             case R.id.StallColl:
-                new GetInfo(getContext(),"STALL",MainApp.this);
+                new GetList(getContext(),MainApp.this).execute("stall");
                 break;
             case R.id.AmbulantColl:
-                new GetInfo(getContext(),"AMBULANT",MainApp.this);
+                new GetList(getContext(),MainApp.this).execute("ambulant");
                 break;
         }
     }
