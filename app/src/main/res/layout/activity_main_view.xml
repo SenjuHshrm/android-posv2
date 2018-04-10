@@ -56,6 +56,17 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/user_container"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/StatToolbar"
         android:layout_width="0dp"
@@ -69,17 +80,6 @@
         app:layout_constraintVertical_bias="0.0">
 
     </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/user_container"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </FrameLayout>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -14,8 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
-import com.pylon.emarketpos.controllers.DeviceUser;
-import com.pylon.emarketpos.controllers.MainApp;
+import com.pylon.emarketpos.controllers.*;
 import com.pylon.emarketpos.interfaces.AsyncLoginResponse;
 
 import java.io.BufferedReader;
@@ -106,15 +105,24 @@ public class LoginAuth extends AsyncTask<String,String,String> {
         }else{
             MainApp mApp = new MainApp();
             DeviceUser devUser = new DeviceUser();
+            ToolbarFrag tbFrg = new ToolbarFrag();
+            //
+            Bundle stat = new Bundle();
+            stat.putString("Stat", mContext.getString(R.string.toolbarTitleMenu));
+            FragmentManager frMn0 = mFrag.getActivity().getSupportFragmentManager();
+            FragmentTransaction trns0 = frMn0.beginTransaction();
+            tbFrg.setArguments(stat);
+            trns0.replace(R.id.StatToolbar,tbFrg);
+            trns0.commit();
+            //
             Bundle bundle = new Bundle();
             bundle.putString("Account",res);
-
             FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
             FragmentTransaction trns1 = frMn1.beginTransaction();
             devUser.setArguments(bundle);
-            trns1.add(R.id.user_container,devUser,"LoggedIn");
+            trns1.add(R.id.user_container,devUser);
             trns1.commit();
-
+            //
             FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
             FragmentTransaction trns2 = frMn2.beginTransaction();
             trns2.replace(R.id.fragment_container,mApp);
