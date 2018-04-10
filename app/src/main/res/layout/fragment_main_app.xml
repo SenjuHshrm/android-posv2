@@ -7,13 +7,14 @@
     tools:context="com.pylon.emarketpos.controllers.MainApp">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/StallColl"
         android:layout_width="0dp"
         android:layout_height="85dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/btn_stall_bg"
+        android:onClick="FragGetInfo"
         android:text="@string/stallCol"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -22,17 +23,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/AmbulantColl"
         android:layout_width="0dp"
         android:layout_height="85dp"
         android:layout_marginEnd="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/btn_ambulant_bg"
+        android:onClick="FragGetInfo"
         android:text="@string/ambCol"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/StallColl" />
 </android.support.constraint.ConstraintLayout>
