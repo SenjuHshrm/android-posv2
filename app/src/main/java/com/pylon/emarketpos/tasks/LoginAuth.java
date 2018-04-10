@@ -1,6 +1,5 @@
 package com.pylon.emarketpos.tasks;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.controllers.*;
-import com.pylon.emarketpos.interfaces.AsyncLoginResponse;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
