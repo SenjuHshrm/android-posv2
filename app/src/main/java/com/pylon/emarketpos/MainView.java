@@ -3,6 +3,7 @@ package com.pylon.emarketpos;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.pylon.emarketpos.controllers.*;
 
@@ -23,10 +24,15 @@ public class MainView extends AppCompatActivity{
             FragmentTransaction LoginMan = getSupportFragmentManager().beginTransaction();
             statBundle.putString("Stat",this.getString(R.string.lblBtnLogin));
             tbFrag.setArguments(statBundle);
-            LoginMan.add(R.id.StatToolbar,tbFrag).commit();
+            LoginMan.add(R.id.StatToolbar,tbFrag,"LoginView").commit();
             //LoginForm
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFrag(),null).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
 
         }
     }
+//    @Override
+//    public void onBackPressed(){
+//
+//    }
+
 }

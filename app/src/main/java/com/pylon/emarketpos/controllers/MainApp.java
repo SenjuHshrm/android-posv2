@@ -27,12 +27,29 @@ public class MainApp extends Fragment implements View.OnClickListener{
     }
     @Override
     public void onClick(View v){
+        ToolbarFrag tbFrag = new ToolbarFrag();
+        CustomerList custList = new CustomerList();
+
+        Bundle StatText = new Bundle();
+        Bundle type = new Bundle();
         switch(v.getId()){
             case R.id.StallColl:
-                new GetList(getContext(),MainApp.this).execute("stall");
+                StatText.putString("Stat",getString(R.string.stallCol));
+                tbFrag.setArguments(StatText);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tbFrag).addToBackStack("StatToolbar").commit();
+
+                type.putString("type","stall");
+                custList.setArguments(type);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,custList).addToBackStack("ContentView").commit();
                 break;
             case R.id.AmbulantColl:
-                new GetList(getContext(),MainApp.this).execute("ambulant");
+                StatText.putString("Stat",getString(R.string.ambCol));
+                tbFrag.setArguments(StatText);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tbFrag).addToBackStack("StatToolbar").commit();
+
+                type.putString("type","ambulant");
+                custList.setArguments(type);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,custList).addToBackStack("ContentView").commit();
                 break;
         }
     }

@@ -3,9 +3,17 @@ package com.pylon.emarketpos.tasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
+
+import com.pylon.emarketpos.R;
+import com.pylon.emarketpos.controllers.CustomerList;
+import com.pylon.emarketpos.controllers.ToolbarFrag;
+import com.pylon.emarketpos.interfaces.SearchDataResponse;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,10 +30,12 @@ import java.io.InputStreamReader;
 public class GetList extends AsyncTask<String,Void,String> {
     private Context mContext;
     private Fragment mFrag;
+    private String mType;
+    public SearchDataResponse mCallBack = null;
     private ProgressDialog pLoading;
-    public GetList(Context context, @Nullable Fragment fragment){
+    public GetList(Context context, String type){
         this.mContext = context;
-        this.mFrag = fragment;
+        this.mType = type;
     }
     @Override
     protected void onPreExecute(){
@@ -56,13 +66,13 @@ public class GetList extends AsyncTask<String,Void,String> {
             }
         }catch(IOException ioEx){
             ioEx.printStackTrace();
+            return "exception";
         }
         return builder.toString();
     }
     @Override
     protected void onPostExecute(String res){
         pLoading.dismiss();
-        Toast.makeText(mContext,"AsyncTask working",Toast.LENGTH_LONG).show();
-
+        mCallBack.responseData(res);
     }
 }
