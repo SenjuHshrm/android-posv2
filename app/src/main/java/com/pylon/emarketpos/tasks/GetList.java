@@ -3,16 +3,8 @@ package com.pylon.emarketpos.tasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
-import com.pylon.emarketpos.R;
-import com.pylon.emarketpos.controllers.CustomerList;
-import com.pylon.emarketpos.controllers.ToolbarFrag;
 import com.pylon.emarketpos.interfaces.SearchDataResponse;
 
 import org.apache.http.HttpEntity;

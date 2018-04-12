@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pylon.emarketpos.controllers.CustomerList">
+    tools:context="com.pylon.emarketpos.controllers.AmbulantSearchForm">
 
     <TextView
         android:id="@+id/ListType"
@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="@string/lblStallNo"
+        android:text="@string/lblAmbList"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,11 +33,12 @@
         app:layout_constraintTop_toBottomOf="@+id/ListType">
 
         <EditText
-            android:id="@+id/SearchInputData"
+            android:id="@+id/AmbInputData"
             style="@android:style/Widget.Material.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/hintSearchAmbulant"
             android:inputType="text"
             android:visibility="visible"
             tools:layout_editor_absoluteX="85dp"
@@ -44,7 +46,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/SearchData"
+        android:id="@+id/AmbSearchBtn"
         style="@android:style/Widget.Material.Button.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -103,15 +103,6 @@ public class LoginAuth extends AsyncTask<String,String,String> {
         }else{
             MainApp mApp = new MainApp();
             DeviceUser devUser = new DeviceUser();
-            ToolbarFrag tbFrg = new ToolbarFrag();
-            //
-            Bundle stat = new Bundle();
-            stat.putString("Stat", mContext.getString(R.string.toolbarTitleMenu));
-            FragmentManager frMn0 = mFrag.getActivity().getSupportFragmentManager();
-            FragmentTransaction trns0 = frMn0.beginTransaction();
-            tbFrg.setArguments(stat);
-            trns0.replace(R.id.StatToolbar,tbFrg);
-            trns0.commit();
             //
             Bundle bundle = new Bundle();
             bundle.putString("Account",res);

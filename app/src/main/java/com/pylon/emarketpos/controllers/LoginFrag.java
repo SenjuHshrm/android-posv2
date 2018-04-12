@@ -21,6 +21,11 @@ public class LoginFrag extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        ToolbarFrag tbFrag = new ToolbarFrag();
+        Bundle bn = new Bundle();
+        bn.putString("Stat",getString(R.string.lblBtnLogin));
+        tbFrag.setArguments(bn);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tbFrag).commit();
         username = (EditText) view.findViewById(R.id.UsernameInput);
         password = (EditText) view.findViewById(R.id.PasswordInput);
         Button LoginBtn = (Button) view.findViewById(R.id.btnLogin);
