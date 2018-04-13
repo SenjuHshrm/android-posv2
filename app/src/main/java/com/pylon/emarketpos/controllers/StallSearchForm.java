@@ -41,7 +41,7 @@ import java.util.Map;
 public class StallSearchForm extends Fragment {
     private EditText inputReq;
     private Button searchBtn;
-    private ListView StallList;
+    private ListView StallListView;
 
     public StallSearchForm() {
 
@@ -53,7 +53,7 @@ public class StallSearchForm extends Fragment {
         View view = inflater.inflate(R.layout.fragment_stall_search_form, container, false);
         inputReq = (EditText) view.findViewById(R.id.StallInputData);
         searchBtn = (Button) view.findViewById(R.id.StallSearchBtn);
-        StallList = (ListView) view.findViewById(R.id.StallList);
+        StallListView = (ListView) view.findViewById(R.id.StallList);
         searchBtn.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -133,8 +133,8 @@ public class StallSearchForm extends Fragment {
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.support_simple_spinner_dropdown_item,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.text2,R.id.text2,R.id.text2});
-            StallList.setAdapter(adapter);
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business});
+            StallListView.setAdapter(adapter);
         }
 
     }
