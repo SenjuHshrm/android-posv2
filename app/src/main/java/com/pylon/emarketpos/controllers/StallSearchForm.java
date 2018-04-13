@@ -59,7 +59,11 @@ public class StallSearchForm extends Fragment {
             @Override
             public void onClick(View view) {
                 final String reqData = inputReq.getText().toString();
-                new SearchData(getContext()).execute(reqData);
+                if(reqData.equals("")){
+                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_LONG).show();
+                }else{
+                    new SearchData(getContext()).execute(reqData);
+                }
             }
         });
         return view;
