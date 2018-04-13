@@ -109,12 +109,13 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
             FragmentTransaction trns1 = frMn1.beginTransaction();
             devUser.setArguments(bundle);
-            trns1.add(R.id.user_container,devUser).addToBackStack("StatToolbar");
+            trns1.replace(R.id.user_container,devUser);
             trns1.commit();
             //
             FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
             FragmentTransaction trns2 = frMn2.beginTransaction();
-            trns2.add(R.id.fragment_container,mApp,"MainApp").hide(mFrag).addToBackStack("ContentView");
+            trns2.hide(mFrag);
+            trns2.add(R.id.fragment_container,mApp,"MainApp");
             trns2.commit();
         }
     }

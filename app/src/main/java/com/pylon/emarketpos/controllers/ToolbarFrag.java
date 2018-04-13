@@ -21,6 +21,12 @@ public class ToolbarFrag extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_toolbar, container, false);
         TextView StatToolbar = (TextView) view.findViewById(R.id.TxtViewStatBar);
+        String res = getArguments().getString("Stat");
+        if(res.equals(getString(R.string.stallCol))){
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StallSearchForm(),"StallSearch").commit();
+        }else if(res.equals(getString(R.string.ambCol))){
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AmbulantSearchForm(),"AmbulantSearch").commit();
+        }
         StatToolbar.setText(getArguments().getString("Stat"));
         return view;
     }

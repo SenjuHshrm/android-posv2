@@ -16,13 +16,8 @@ import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.interfaces.SearchDataResponse;
 import com.pylon.emarketpos.tasks.GetList;
 
-public class AmbulantSearchForm extends Fragment implements SearchDataResponse{
-    GetList getList;
-    private String type;
-    private Button searchReqData;
-    private EditText searchIn;
-    private String searchResData;
-    private String RequestData;
+public class AmbulantSearchForm extends Fragment{
+    private EditText AmbSearch;
     public AmbulantSearchForm() {
 
     }
@@ -30,38 +25,8 @@ public class AmbulantSearchForm extends Fragment implements SearchDataResponse{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_ambulant_search_form, container, false);
-        TextView listType = (TextView) view.findViewById(R.id.ListType);
-        TextInputLayout txtInLayout = (TextInputLayout) view.findViewById(R.id.searchInputLayout);
-        type = getArguments().getString("type");
-        if(type.equalsIgnoreCase("stall")){
-            listType.setText(getActivity().getString(R.string.lblStallList));
-            txtInLayout.setHint(getActivity().getString(R.string.hintSearchStall));
-        }else if(type.equalsIgnoreCase("ambulant")){
-            listType.setText(getActivity().getString(R.string.lblAmbList));
-            txtInLayout.setHint(getActivity().getString(R.string.hintSearchAmbulant));
-        }
-        txtInLayout.setEnabled(true);
-        getList = new GetList(getContext(),type);
-        getList.mCallBack = this;
-        searchIn = (EditText) view.findViewById(R.id.AmbInputData);
-        searchIn.setEnabled(true);
-        searchReqData = (Button) view.findViewById(R.id.AmbSearchBtn);
-        searchReqData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RequestData = searchIn.getText().toString();
-                if(RequestData.equals("")){
-                    Toast.makeText(getContext(),"No input.",Toast.LENGTH_LONG).show();
-                }else{
-                    getList.execute(RequestData);
-                }
-            }
-        });
+        AmbSearch = (EditText) view.findViewById(R.id.AmbInputData);
         return view;
     }
 
-    @Override
-    public void responseData(String str) {
-        this.searchResData = str;
-    }
 }

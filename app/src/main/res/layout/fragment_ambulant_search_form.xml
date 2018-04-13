@@ -26,9 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ListType">
 
@@ -42,8 +40,10 @@
             android:inputType="text"
             android:visibility="visible"
             tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="50dp" />
+            tools:layout_editor_absoluteY="50dp"/>
+
     </android.support.design.widget.TextInputLayout>
+
 
     <Button
         android:id="@+id/AmbSearchBtn"
@@ -52,22 +52,24 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
         android:background="@android:color/holo_green_dark"
         android:text="@string/hintSearch"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchInputLayout" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/AmbulantList"
         android:layout_width="0dp"
-        android:layout_height="411dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchInputLayout" />
 
 
 </android.support.constraint.ConstraintLayout>

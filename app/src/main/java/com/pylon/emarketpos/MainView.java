@@ -38,7 +38,7 @@ public class MainView extends AppCompatActivity{
                 builder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        bn.putString("Stat",getString(R.string.toolbarTitleMenu));
+                        bn.putString("Stat",getString(R.string.lblBtnLogin));
                         DevUser.putString("Account","");
                         tbFrag.setArguments(bn);
                         devUser.setArguments(DevUser);
@@ -52,10 +52,10 @@ public class MainView extends AppCompatActivity{
                 builder.show();
                 break;
             case "AmbulantSearch":
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
             case "StallSearch":
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
             default:
                 finish();
