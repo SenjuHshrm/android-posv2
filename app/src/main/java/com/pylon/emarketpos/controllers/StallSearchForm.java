@@ -10,10 +10,12 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
@@ -64,6 +66,21 @@ public class StallSearchForm extends Fragment {
                 }else{
                     new SearchData(getContext()).execute(reqData);
                 }
+            }
+        });
+        StallListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView StallNumber = (TextView) view.findViewById(R.id.List_StallNum);
+                TextView OwnerName = (TextView) view.findViewById(R.id.List_Name);
+                TextView BusinessType = (TextView) view.findViewById(R.id.List_Business);
+                StallPrintForm stallPrintForm = new StallPrintForm();
+                Bundle x = new Bundle();
+                x.putString("StallNumber",StallNumber.getText().toString());
+                x.putString("OwnerName",OwnerName.getText().toString());
+                x.putString("BusinessType",BusinessType.getText().toString());
+                stallPrintForm.setArguments(x);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
             }
         });
         return view;

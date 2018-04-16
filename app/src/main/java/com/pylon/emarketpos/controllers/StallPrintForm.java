@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.pylon.emarketpos.R;
 
 public class StallPrintForm extends Fragment {
+    private EditText StallNum, OwnerName, BusinessType;
     public StallPrintForm() {
 
     }
@@ -18,7 +20,13 @@ public class StallPrintForm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stall_print_form, container, false);
-
+        Bundle x = getArguments();
+        StallNum = (EditText) view.findViewById(R.id.Print_StallNum);
+        OwnerName = (EditText) view.findViewById(R.id.Print_OwnerName);
+        BusinessType = (EditText) view.findViewById(R.id.Print_BusinessType);
+        StallNum.setText(x.getString("StallNumber"));
+        OwnerName.setText(x.getString("OwnerName"));
+        BusinessType.setText(x.getString("BusinessType"));
         return view;
     }
 
