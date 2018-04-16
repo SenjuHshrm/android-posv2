@@ -57,10 +57,9 @@ public class MainView extends AppCompatActivity{
             case "StallSearch":
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
-            default:
-                finish();
+            case "LoginForm":
+                this.finish();
                 break;
-
         }
 
     }
