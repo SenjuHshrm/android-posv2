@@ -7,7 +7,8 @@ import android.os.AsyncTask;
 public class SavePayment extends AsyncTask<String,String,String> {
     private ProgressDialog pLoading;
     private Context mContext;
-    private String[] RecInfo;
+    private String[] RecInfo = new String[10];
+    private String TrnsType;
     public SavePayment(Context context){
         this.mContext = context;
     }
@@ -20,18 +21,17 @@ public class SavePayment extends AsyncTask<String,String,String> {
         pLoading.show();
     }
     @Override
-    protected String doInBackground(String... param) {
+    protected String doInBackground(String[] param) {
         String xhrRes = "MXXXXXX0";
-        RecInfo = new String[5];
-        RecInfo[0] = param[0];
-        RecInfo[1] = param[1];
-        RecInfo[2] = param[2];
-        RecInfo[3] = param[3];
+        TrnsType = param[0];
+        for(int i = 0; i < param.length; i++){
+            RecInfo[i] = param[i];
+        }
         return xhrRes;
     }
     @Override
     public void onPostExecute(String res){
         pLoading.dismiss();
-        new PrintReceipt(mContext).PrintReceiptPrep("stall",RecInfo,res);
+        new PrintReceipt(mContext).PrintReceiptPrep(TrnsType,RecInfo,res);
     }
 }

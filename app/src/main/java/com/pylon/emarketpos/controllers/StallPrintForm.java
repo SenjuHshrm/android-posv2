@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.SavePayment;
 
-public class StallPrintForm extends Fragment {
+public class StallPrintForm extends Fragment implements View.OnClickListener{
     private EditText StallNum, OwnerName, BusinessType, Amount;
     private Button stallPrint;
-
+    private String[] SendInfo;
     public StallPrintForm() {
 
     }
@@ -33,17 +34,24 @@ public class StallPrintForm extends Fragment {
         StallNum.setText(x.getString("StallNumber"));
         OwnerName.setText(x.getString("OwnerName"));
         BusinessType.setText(x.getString("BusinessType"));
-        stallPrint.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                final String pStallNum = StallNum.getText().toString();
-                final String pOwnerName = OwnerName.getText().toString();
-                final String pBusiness = BusinessType.getText().toString();
-                final String pAmount = Amount.getText().toString();
-                new SavePayment(getContext()).execute(pStallNum,pOwnerName,pBusiness,pAmount);
-            }
-        });
+        stallPrint.setOnClickListener(this);
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        TextView DevUser = (TextView) getActivity().findViewById(R.id.DeviceUserDisplay);
+        final String pStallNum = StallNum.getText().toString();
+        final String pOwnerName = OwnerName.getText().toString();
+        final String pBusiness = BusinessType.getText().toString();
+        final String pAmount = Amount.getText().toString();
+        SendInfo = new String[10];
+        SendInfo[0] = "stall";
+        SendInfo[1] = pStallNum;
+        SendInfo[2] = pOwnerName;
+        SendInfo[3] = pBusiness;
+        SendInfo[4] = pAmount;
+        SendInfo[5] = DevUser.getText().toString();
+        new SavePayment(getContext()).execute(SendInfo);
+    }
 }
