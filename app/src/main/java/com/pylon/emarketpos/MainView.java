@@ -57,6 +57,9 @@ public class MainView extends AppCompatActivity{
             case "StallSearch":
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
+            case "StallPrint":
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                break;
             case "LoginForm":
                 this.finish();
                 break;
