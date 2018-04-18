@@ -60,6 +60,9 @@ public class MainView extends AppCompatActivity{
             case "StallPrint":
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
                 break;
+            case "AmbulantPrint":
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AmbulantSearchForm(),"AmbulantSearch").commit();
+                break;
             case "LoginForm":
                 this.finish();
                 break;

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
@@ -67,7 +68,14 @@ public class AmbulantSearchForm extends Fragment{
         AmbListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                TextView AmbOwner = (TextView) view.findViewById(R.id.List_AmbOwner);
+                TextView AmbBusiness = (TextView) view.findViewById(R.id.List_AmbBusiness);
+                AmbulantPrintForm ambPrintForm = new AmbulantPrintForm();
+                Bundle x = new Bundle();
+                x.putString("AmbOwner",AmbOwner.getText().toString());
+                x.putString("AmbBusiness",AmbBusiness.getText().toString());
+                ambPrintForm.setArguments(x);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
             }
         });
         return view;
