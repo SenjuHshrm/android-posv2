@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
 
@@ -22,12 +24,19 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AmbulantSearchForm extends Fragment{
     private EditText inputReq;
@@ -48,6 +57,11 @@ public class AmbulantSearchForm extends Fragment{
             @Override
             public void onClick(View view) {
                 final String reqData = inputReq.getText().toString();
+                if(reqData.equals("")){
+                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_LONG).show();
+                }else{
+                    new SearchData(getContext()).execute(reqData);
+                }
             }
         });
         AmbListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,6 +116,32 @@ public class AmbulantSearchForm extends Fragment{
                 xhrRes = "exception";
             }
             return xhrRes;
+        }
+        @Override
+        protected void onPostExecute(String res){
+            if(res.equalsIgnoreCase("conErr") || res.equalsIgnoreCase("exception")){
+                Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_LONG).show();
+            }else{
+                ConstructList(res);
+            }
+            pLoading.dismiss();
+        }
+        private void ConstructList(CharSequence jsonString){
+            List<Map<String,String>> data = new ArrayList<Map<String,String>>();
+            try{
+                JSONArray AmbList = new JSONObject(jsonString.toString()).getJSONArray("AMB_RES");
+                for(int i = 0; i < AmbList.length(); i++){
+                    JSONObject post = AmbList.getJSONObject(i);
+                    Map<String,String> datum = new HashMap<String,String>(2);
+                    datum.put("OwnerName", post.getString("Ambulant Owner"));
+                    datum.put("BusinessNat",post.getString("Business"));
+                    data.add(datum);
+                }
+            }catch(JSONException JSONEx){
+                Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
+            }
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness});
+            AmbListView.setAdapter(adapter);
         }
     }
 

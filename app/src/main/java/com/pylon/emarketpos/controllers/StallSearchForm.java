@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,7 +153,7 @@ public class StallSearchForm extends Fragment {
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business});
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business});
             StallListView.setAdapter(adapter);
         }
 
