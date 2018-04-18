@@ -3,7 +3,12 @@ package com.pylon.emarketpos.tasks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
+
+import com.pylon.emarketpos.R;
+import com.pylon.emarketpos.controllers.AmbulantSearchForm;
+import com.pylon.emarketpos.controllers.StallSearchForm;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +26,7 @@ import java.net.URL;
 public class SavePayment extends AsyncTask<String,String,String> {
     private ProgressDialog pLoading;
     private Context mContext;
+    private Fragment mFrag;
     private String[] RecInfo = new String[10];
     private String TrnsType, RequestData;
     private URL url;
@@ -28,8 +34,9 @@ public class SavePayment extends AsyncTask<String,String,String> {
     private JSONObject jsonObj;
     private OutputStream os;
     private InputStream is;
-    public SavePayment(Context context){
+    public SavePayment(Context context, Fragment fragment){
         this.mContext = context;
+        this.mFrag = fragment;
     }
     @Override
     protected void onPreExecute(){
@@ -112,6 +119,14 @@ public class SavePayment extends AsyncTask<String,String,String> {
             Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_LONG).show();
         } else {
             new PrintReceipt(mContext).PrintReceiptPrep(TrnsType,RecInfo,res);
+            switch(TrnsType){
+                case "stall":
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                    break;
+                case "ambulant":
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AmbulantSearchForm(), "AmbulantSearch").commit();
+                    break;
+            }
         }
     }
 }

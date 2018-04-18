@@ -49,6 +49,6 @@ public class AmbulantPrintForm extends Fragment implements View.OnClickListener{
         SendInfo[2] = pBusiness;
         SendInfo[3] = pAmount;
         SendInfo[4] = DevUser.getText().toString();
-        new SavePayment(getContext()).execute(SendInfo);
+        new SavePayment(getContext(),this).execute(SendInfo);
     }
 }

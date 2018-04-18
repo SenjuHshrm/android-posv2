@@ -52,6 +52,6 @@ public class StallPrintForm extends Fragment implements View.OnClickListener{
         SendInfo[3] = pBusiness;
         SendInfo[4] = pAmount;
         SendInfo[5] = DevUser.getText().toString();
-        new SavePayment(getContext()).execute(SendInfo);
+        new SavePayment(getContext(),this).execute(SendInfo);
     }
 }
