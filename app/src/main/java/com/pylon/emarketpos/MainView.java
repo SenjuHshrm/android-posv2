@@ -1,7 +1,9 @@
 package com.pylon.emarketpos;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -12,35 +14,15 @@ import com.pylon.emarketpos.controllers.*;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 public class MainView extends AppCompatActivity{
-    DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
-        dbHelper = new DatabaseHelper(this);
-        Cursor res = dbHelper.getAllData();
-        if(res.getCount() == 0){
-            if(findViewById(R.id.fragment_container) != null){
-                if(savedInstanceState != null){
-                    return;
-                }
-                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
-            }
-        }else{
-            StringBuilder buffer = new StringBuilder();
-            while(res.moveToNext()){
-                buffer.append(res.getString(1));
-            }
-            DeviceUser devUser = new DeviceUser();
-            Bundle x = new Bundle();
-            x.putString("Account",buffer.toString());
-            devUser.setArguments(x);
-            getSupportFragmentManager().beginTransaction().add(R.id.user_container, devUser).commit();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new MainApp(), "MainApp").commit();
-        }
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection()).commit();
     }
     @Override
     public void onBackPressed(){
+        final DatabaseHelper dbHelper;
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
         final ToolbarFrag tbFrag = new ToolbarFrag();

@@ -27,6 +27,9 @@
     <string name="btnSearch">Search</string>
     <string name="btnProceed">Proceed</string>
     <string name="btnResetSearch">Reset</string>
+    <string name="chkCon">Establishing connection&#8230;</string>
+    <string name="noConWarn">No Connection</string>
+    <string name="tryAgain"><a>Try Again</a></string>
     <item name="visible" type="id" />
     <item name="masked" type="id" />
 
