@@ -83,7 +83,7 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
             }else{
                 StringBuilder buffer = new StringBuilder();
                 while(curs.moveToNext()){
-                    buffer.append(curs.getString(1));
+                    buffer.append(curs.getString(0));
                 }
                 DeviceUser devUser = new DeviceUser();
                 Bundle x = new Bundle();
