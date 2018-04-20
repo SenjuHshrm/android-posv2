@@ -32,6 +32,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     private URL url;
     private HttpURLConnection conn;
     private ProgressDialog pLoading;
+    DatabaseHelper dbHelper;
     public LoginAuth(Context context,@Nullable Fragment frag){
         this.mContext = context;
         this.mFrag = frag;
@@ -95,28 +96,34 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     }
     @Override
     protected void onPostExecute(String res){
-        pLoading.dismiss();
+        dbHelper = new DatabaseHelper(mContext);
+        boolean response = dbHelper.insertData(res);
         if(res.equalsIgnoreCase("false")){
             Toast.makeText(mContext,"Wrong username or password.",Toast.LENGTH_LONG).show();
         }else if(res.equalsIgnoreCase("IOEx") || res.equalsIgnoreCase("URLEx") || res.equalsIgnoreCase("unsuccessful")){
             Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
         }else{
-            MainApp mApp = new MainApp();
-            DeviceUser devUser = new DeviceUser();
-            //
-            Bundle bundle = new Bundle();
-            bundle.putString("Account",res);
-            FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
-            FragmentTransaction trns1 = frMn1.beginTransaction();
-            devUser.setArguments(bundle);
-            trns1.replace(R.id.user_container,devUser);
-            trns1.commit();
-            //
-            FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
-            FragmentTransaction trns2 = frMn2.beginTransaction();
-            trns2.hide(mFrag);
-            trns2.add(R.id.fragment_container,mApp,"MainApp");
-            trns2.commit();
+            if(response == true){
+                MainApp mApp = new MainApp();
+                DeviceUser devUser = new DeviceUser();
+                //
+                Bundle bundle = new Bundle();
+                bundle.putString("Account",res);
+                FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
+                FragmentTransaction trns1 = frMn1.beginTransaction();
+                devUser.setArguments(bundle);
+                trns1.replace(R.id.user_container,devUser);
+                trns1.commit();
+                //
+                FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
+                FragmentTransaction trns2 = frMn2.beginTransaction();
+                trns2.hide(mFrag);
+                trns2.add(R.id.fragment_container,mApp,"MainApp");
+                trns2.commit();
+            }else{
+                Toast.makeText(mContext,"An error occured",Toast.LENGTH_LONG).show();
+            }
         }
+        pLoading.dismiss();
     }
 }
