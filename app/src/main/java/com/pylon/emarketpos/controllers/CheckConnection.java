@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.pylon.emarketpos.MainView;
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.EstablishConn;
 

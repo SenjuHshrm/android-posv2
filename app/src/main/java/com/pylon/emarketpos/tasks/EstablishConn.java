@@ -12,8 +12,6 @@ import com.pylon.emarketpos.controllers.LoginFrag;
 import com.pylon.emarketpos.controllers.MainApp;
 import com.pylon.emarketpos.controllers.NoConnection;
 
-import org.apache.http.protocol.HTTP;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

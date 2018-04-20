@@ -1,9 +1,6 @@
 package com.pylon.emarketpos;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
