@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.LoginAuth;
 
@@ -34,7 +36,11 @@ public class LoginFrag extends Fragment{
             public void onClick(View view) {
                 final String getUsername = username.getText().toString();
                 final String getPassword = password.getText().toString();
-                new LoginAuth(view.getContext(), LoginFrag.this).execute(getUsername,getPassword);
+                if(getUsername.equalsIgnoreCase("") || getPassword.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(),"Please input required fields",Toast.LENGTH_LONG).show();
+                }else {
+                    new LoginAuth(view.getContext(), LoginFrag.this).execute(getUsername, getPassword);
+                }
             }
         });
         return view;
