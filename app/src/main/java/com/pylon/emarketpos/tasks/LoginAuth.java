@@ -51,7 +51,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
         String xhrRes;
         try{
             //url
-            url = new URL("http://192.168.143.24/login.inc.php");
+            url = new URL("http://192.168.143.24/login");
             //set request data
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);

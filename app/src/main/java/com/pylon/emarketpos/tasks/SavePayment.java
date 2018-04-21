@@ -55,7 +55,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
         }
         try{
             //url constructor
-            url = new URL("http://192.168.143.24/SavePayment.inc.php");
+            url = new URL("http://192.168.143.24/save-transaction");
             //json constructor
             jsonObj = new JSONObject();
             switch(TrnsType){

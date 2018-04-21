@@ -38,7 +38,7 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
         String xhrRes;
         try{
             //url
-            url = new URL("http://192.168.143.24/CheckConnection.inc.php");
+            url = new URL("http://192.168.143.24/connection-test");
             //req
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
