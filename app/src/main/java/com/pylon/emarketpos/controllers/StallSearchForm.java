@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.test.suitebuilder.annotation.Suppress;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,9 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -100,14 +104,18 @@ public class StallSearchForm extends Fragment {
             pLoading.show();
         }
         @Override
+        @SuppressWarnings("deprecation")
         protected String doInBackground(String... strings) {
             String xhrRes;
             try{
                 String encodedQuery = URLEncoder.encode(strings[0],"utf-8");
                 String url = "http://192.168.143.24/getStallInfo.inc.php?info=" + encodedQuery;
                 StringBuilder builder = new StringBuilder();
-                HttpClient client = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(url);
+                HttpParams httpParameters = new BasicHttpParams();
+                HttpConnectionParams.setConnectionTimeout(httpParameters,15000);
+                HttpConnectionParams.setSoTimeout(httpParameters,10000);
+                HttpClient client = new DefaultHttpClient(httpParameters);
                 HttpResponse response = client.execute(httpGet);
                 StatusLine statLine = response.getStatusLine();
                 int statCode = statLine.getStatusCode();
