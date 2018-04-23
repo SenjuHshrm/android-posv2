@@ -109,7 +109,7 @@ public class StallSearchForm extends Fragment {
             String xhrRes;
             try{
                 String encodedQuery = URLEncoder.encode(strings[0],"utf-8");
-                String url = "http://192.168.143.24/getStallInfo.inc.php?info=" + encodedQuery;
+                String url = "http://192.168.143.24/get-info/stall/" + encodedQuery;
                 StringBuilder builder = new StringBuilder();
                 HttpGet httpGet = new HttpGet(url);
                 HttpParams httpParameters = new BasicHttpParams();

@@ -61,10 +61,11 @@ public class AmbulantSearchForm extends Fragment{
             @Override
             public void onClick(View view) {
                 final String reqData = inputReq.getText().toString();
+                String[] divName = reqData.split(" ");
                 if(reqData.equals("")){
                     Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_LONG).show();
                 }else{
-                    new SearchData(getContext()).execute(reqData);
+                    new SearchData(getContext()).execute(divName[0],divName[1]);
                 }
             }
         });
@@ -100,11 +101,10 @@ public class AmbulantSearchForm extends Fragment{
         }
         @Override
         @SuppressWarnings("deprecation")
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... param) {
             String xhrRes;
             try{
-                String encodedQuery = URLEncoder.encode(strings[0],"utf-8");
-                String url = "http://192.168.143.24/getAmbulantInfo.inc.php?info=" + encodedQuery;
+                String url = "http://192.168.143.24/get-info/ambulant/" + param[0] + "%20" + param[1];
                 StringBuilder builder = new StringBuilder();
                 HttpGet httpGet = new HttpGet(url);
                 HttpParams httpParameters = new BasicHttpParams();
