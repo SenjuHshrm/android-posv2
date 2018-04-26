@@ -121,10 +121,10 @@ public class SavePayment extends AsyncTask<String,String,String> {
             new PrintReceipt(mContext).PrintReceiptPrep(TrnsType,RecInfo,res);
             switch(TrnsType){
                 case "stall":
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
                     break;
                 case "ambulant":
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AmbulantSearchForm(), "AmbulantSearch").commit();
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new AmbulantSearchForm(), "AmbulantSearch").commit();
                     break;
             }
         }

@@ -78,7 +78,7 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                     if(instance != null){
                         return;
                     }
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,0).replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
                 }
             }else{
                 StringBuilder buffer = new StringBuilder();

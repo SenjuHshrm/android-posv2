@@ -79,7 +79,7 @@ public class AmbulantSearchForm extends Fragment{
                 x.putString("AmbOwner",AmbOwner.getText().toString());
                 x.putString("AmbBusiness",AmbBusiness.getText().toString());
                 ambPrintForm.setArguments(x);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
             }
         });
         return view;

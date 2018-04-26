@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.pylon.emarketpos.R;
 
@@ -24,23 +25,17 @@ public class MainApp extends Fragment{
         StallColl.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Bundle Stat = new Bundle();
-                Stat.putString("Stat",getString(R.string.stallCol));
-                ToolbarFrag tb = new ToolbarFrag();
-                tb.setArguments(Stat);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tb).commit();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new StallSearchForm(),"StallSearch").commit();
+                TextView txtStat = getActivity().findViewById(R.id.TxtViewStatBar);
+                txtStat.setText(R.string.stallCol);
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,new StallSearchForm(),"StallSearch").commit();
             }
         });
         AmbColl.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Bundle Stat = new Bundle();
-                Stat.putString("Stat",getString(R.string.ambCol));
-                ToolbarFrag tb = new ToolbarFrag();
-                tb.setArguments(Stat);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tb).commit();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new AmbulantSearchForm(),"AmbulantSearch").commit();
+                TextView txtStat = getActivity().findViewById(R.id.TxtViewStatBar);
+                txtStat.setText(R.string.ambCol);
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,new AmbulantSearchForm(),"AmbulantSearch").commit();
             }
         });
         ToolbarFrag tbFrag = new ToolbarFrag();

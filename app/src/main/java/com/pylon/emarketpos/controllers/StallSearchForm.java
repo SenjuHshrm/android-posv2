@@ -83,7 +83,7 @@ public class StallSearchForm extends Fragment {
                 x.putString("OwnerName",OwnerName.getText().toString());
                 x.putString("BusinessType",BusinessType.getText().toString());
                 stallPrintForm.setArguments(x);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
             }
         });
         return view;

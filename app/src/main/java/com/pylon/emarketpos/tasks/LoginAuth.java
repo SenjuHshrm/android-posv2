@@ -115,11 +115,12 @@ public class LoginAuth extends AsyncTask<String,String,String> {
                 trns1.replace(R.id.user_container,devUser);
                 trns1.commit();
                 //
-                FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
-                FragmentTransaction trns2 = frMn2.beginTransaction();
-                trns2.hide(mFrag);
-                trns2.add(R.id.fragment_container,mApp,"MainApp");
-                trns2.commit();
+//                FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
+//                FragmentTransaction trns2 = frMn2.beginTransaction();
+//                trns2.hide(mFrag);
+//                trns2.add(R.id.fragment_container,mApp,"MainApp");
+//                trns2.setCustomAnimations(R.anim.exit_to_right,R.anim.enter_from_right).commit();
+                mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,mApp,"MainApp").commit();
             }else{
                 Toast.makeText(mContext,"An error occured",Toast.LENGTH_LONG).show();
             }

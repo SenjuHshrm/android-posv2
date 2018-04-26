@@ -41,7 +41,7 @@ public class MainView extends AppCompatActivity{
                         devUser.setArguments(DevUser);
                         getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tbFrag).commit();
                         getSupportFragmentManager().beginTransaction().replace(R.id.user_container,devUser).commit();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
                     }
                 });
                 builder.setNegativeButton("Cancel",null);
@@ -49,16 +49,16 @@ public class MainView extends AppCompatActivity{
                 builder.show();
                 break;
             case "AmbulantSearch":
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
             case "StallSearch":
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
                 break;
             case "StallPrint":
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
                 break;
             case "AmbulantPrint":
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AmbulantSearchForm(),"AmbulantSearch").commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new AmbulantSearchForm(),"AmbulantSearch").commit();
                 break;
             case "LoginForm":
                 this.finish();
