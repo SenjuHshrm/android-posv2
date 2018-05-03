@@ -5,22 +5,16 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
-
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.controllers.AmbulantSearchForm;
 import com.pylon.emarketpos.controllers.StallSearchForm;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class SavePayment extends AsyncTask<String,String,String> {
@@ -54,9 +48,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
             RecInfo[i] = param[i];
         }
         try{
-            //url constructor
             url = new URL("http://192.168.143.24/save-transaction");
-            //json constructor
             jsonObj = new JSONObject();
             switch(TrnsType){
                 case "stall":
@@ -76,7 +68,6 @@ public class SavePayment extends AsyncTask<String,String,String> {
                     break;
             }
             RequestData = jsonObj.toString();
-            //connection constructor
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -90,7 +81,6 @@ public class SavePayment extends AsyncTask<String,String,String> {
             os = new BufferedOutputStream(conn.getOutputStream());
             os.write(RequestData.getBytes());
             os.flush();
-            //get response data(transaction number)
             int response = conn.getResponseCode();
             if(response == HttpURLConnection.HTTP_OK){
                 is = conn.getInputStream();

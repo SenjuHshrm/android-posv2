@@ -5,19 +5,15 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.controllers.DeviceUser;
 import com.pylon.emarketpos.controllers.LoginFrag;
 import com.pylon.emarketpos.controllers.MainApp;
 import com.pylon.emarketpos.controllers.NoConnection;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class EstablishConn extends AsyncTask<Void,String,String> {
