@@ -6,10 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by Admin on 4/20/2018.
- */
-
 public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "logged_user";
     private static final String TABLE_NAME = "user";

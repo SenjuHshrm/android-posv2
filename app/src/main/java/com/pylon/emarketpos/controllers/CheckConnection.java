@@ -18,7 +18,6 @@ public class CheckConnection extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         new EstablishConn(getContext(),savedInstanceState, this).execute();
         return inflater.inflate(R.layout.fragment_check_connection, container, false);
     }

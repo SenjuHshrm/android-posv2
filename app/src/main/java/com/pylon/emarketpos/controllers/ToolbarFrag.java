@@ -13,7 +13,7 @@ import com.pylon.emarketpos.R;
 public class ToolbarFrag extends Fragment {
 
     public ToolbarFrag() {
-        // Required empty public constructor
+
     }
 
     @Override

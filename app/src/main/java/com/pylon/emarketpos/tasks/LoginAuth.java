@@ -50,9 +50,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     protected String doInBackground(String... params) {
         String xhrRes;
         try{
-            //url
             url = new URL("http://192.168.143.24/login");
-            //set request data
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -70,7 +68,6 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             writer.close();
             os.close();
             conn.connect();
-            //get response data
             int response = conn.getResponseCode();
             if(response == HttpURLConnection.HTTP_OK){
                 InputStream input = conn.getInputStream();
@@ -106,7 +103,6 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             if(response == true){
                 MainApp mApp = new MainApp();
                 DeviceUser devUser = new DeviceUser();
-                //
                 Bundle bundle = new Bundle();
                 bundle.putString("Account",res);
                 FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
@@ -114,12 +110,6 @@ public class LoginAuth extends AsyncTask<String,String,String> {
                 devUser.setArguments(bundle);
                 trns1.replace(R.id.user_container,devUser);
                 trns1.commit();
-                //
-//                FragmentManager frMn2 = mFrag.getActivity().getSupportFragmentManager();
-//                FragmentTransaction trns2 = frMn2.beginTransaction();
-//                trns2.hide(mFrag);
-//                trns2.add(R.id.fragment_container,mApp,"MainApp");
-//                trns2.setCustomAnimations(R.anim.exit_to_right,R.anim.enter_from_right).commit();
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,mApp,"MainApp").commit();
             }else{
                 Toast.makeText(mContext,"An error occured",Toast.LENGTH_LONG).show();

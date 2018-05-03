@@ -37,14 +37,11 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
     protected String doInBackground(Void... voids) {
         String xhrRes;
         try{
-            //url
             url = new URL("http://192.168.143.24/connection-test");
-            //req
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(20000);
             conn.connect();
-            //res
             int resCode = conn.getResponseCode();
             if(resCode == 200){
                 InputStream input = conn.getInputStream();
