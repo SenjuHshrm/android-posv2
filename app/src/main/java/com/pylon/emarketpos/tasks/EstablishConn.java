@@ -56,9 +56,7 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                 xhrRes = "unsuccessful";
             }
 
-        }catch(MalformedURLException urlEx){
-            xhrRes = "exception";
-        }catch(IOException ioEx){
+        }catch(Exception e){
             xhrRes = "exception";
         }
         return xhrRes;
@@ -66,7 +64,7 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
     @Override
     public void onPostExecute(String res){
         if(res.equalsIgnoreCase("unsuccessful") || res.equalsIgnoreCase("exception") || res.equalsIgnoreCase("dbError") || res.equalsIgnoreCase("OOPs something went wrong")){
-            mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NoConnection(),"LoginForm").commit();
+            mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NoConnection(),"NoConn").commit();
         }else if(res.equalsIgnoreCase("ok")){
             dbHelper = new DatabaseHelper(mContext);
             Cursor curs = dbHelper.getAllData();

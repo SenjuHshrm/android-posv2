@@ -82,10 +82,8 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             }else{
                 xhrRes = "unsuccessful";
             }
-        }catch(MalformedURLException urlEx){
-            xhrRes = "URLEx";
-        }catch(IOException IOEx){
-            xhrRes = "IOEx";
+        }catch(Exception e){
+            xhrRes = "exception";
         }finally{
             conn.disconnect();
         }
@@ -95,9 +93,11 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     protected void onPostExecute(String res){
         dbHelper = new DatabaseHelper(mContext);
         boolean response = dbHelper.insertData(res);
-        if(res.equalsIgnoreCase("false")){
-            Toast.makeText(mContext,"Wrong username or password.",Toast.LENGTH_LONG).show();
-        }else if(res.equalsIgnoreCase("IOEx") || res.equalsIgnoreCase("URLEx") || res.equalsIgnoreCase("unsuccessful")){
+        if(res.equalsIgnoreCase("NoUsername")){
+            Toast.makeText(mContext,"Username not registered.",Toast.LENGTH_LONG).show();
+        }else if(res.equalsIgnoreCase("PassInc")){
+            Toast.makeText(mContext,"Password mismatched.",Toast.LENGTH_LONG).show();
+        }else if(res.equalsIgnoreCase("exception") || res.equalsIgnoreCase("unsuccessful")){
             Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
         }else{
             if(response == true){

@@ -102,11 +102,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
                 }
                 xhrRes = StRes.toString();
             }
-        }catch(MalformedURLException mURLEx){
-            xhrRes = "conErr";
-        }catch(JSONException jsonEx){
-            xhrRes = "conErr";
-        }catch(IOException ioEx){
+        }catch(Exception e){
             xhrRes = "conErr";
         }
         return xhrRes;

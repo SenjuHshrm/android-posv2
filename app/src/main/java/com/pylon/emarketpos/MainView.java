@@ -63,6 +63,9 @@ public class MainView extends AppCompatActivity{
             case "LoginForm":
                 this.finish();
                 break;
+            case "NoConn":
+                this.finish();
+                break;
         }
 
     }
