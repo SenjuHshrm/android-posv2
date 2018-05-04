@@ -93,15 +93,17 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
+        <ImageButton
             android:id="@+id/openSettings"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@android:string/VideoView_error_button"
             android:onClick="OpenSettings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/settings_bg" />
     </android.support.constraint.ConstraintLayout>
 
 

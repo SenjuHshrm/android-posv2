@@ -50,7 +50,7 @@ public class MainView extends AppCompatActivity{
                         DevUser.putString("Account","");
                         tbFrag.setArguments(bn);
                         devUser.setArguments(DevUser);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.StatToolbar,tbFrag).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.user_container,tbFrag).commit();
                         getSupportFragmentManager().beginTransaction().replace(R.id.user_container,devUser).commit();
                         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
                     }
