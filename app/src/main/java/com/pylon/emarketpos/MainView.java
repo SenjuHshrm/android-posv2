@@ -26,7 +26,7 @@ public class MainView extends AppCompatActivity{
         }
     }
     public void OpenSettings(View view){
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnSettings()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnSettings(), "SetupConnMod").commit();
     }
     @Override
     public void onBackPressed(){
@@ -81,7 +81,9 @@ public class MainView extends AppCompatActivity{
                 this.finish();
                 break;
             case "SetupConnMod":
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
+                break;
+
         }
 
     }
