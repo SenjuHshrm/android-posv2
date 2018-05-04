@@ -2,6 +2,7 @@ package com.pylon.emarketpos.tasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
@@ -43,12 +44,14 @@ public class SavePayment extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String[] param) {
         String xhrRes = "MXXXXXX0";
+        String ip_host = "http://" + getIp();
+        ip_host = ip_host + "/save-transaction";
         TrnsType = param[0];
         for(int i = 0; i < param.length; i++){
             RecInfo[i] = param[i];
         }
         try{
-            url = new URL("http://192.168.143.24/save-transaction");
+            url = new URL(ip_host);
             jsonObj = new JSONObject();
             switch(TrnsType){
                 case "stall":
@@ -114,5 +117,14 @@ public class SavePayment extends AsyncTask<String,String,String> {
                     break;
             }
         }
+    }
+    private String getIp(){
+        DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
+        Cursor CurIP = dbHelp.selectIP();
+        StringBuilder StrBf = new StringBuilder();
+        while(CurIP.moveToNext()) {
+            StrBf.append(CurIP.getString(0));
+        }
+        return StrBf.toString();
     }
 }

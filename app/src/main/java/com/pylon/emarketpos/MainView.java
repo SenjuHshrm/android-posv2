@@ -1,11 +1,13 @@
 package com.pylon.emarketpos;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.pylon.emarketpos.controllers.*;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
@@ -15,7 +17,16 @@ public class MainView extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection()).commit();
+        DatabaseHelper DBHelp = new DatabaseHelper(this);
+        Cursor getIP = DBHelp.selectIP();
+        if(getIP.getCount() == 0){
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new ConnSettings(), "SetupConnStart").commit();
+        }else{
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection()).commit();
+        }
+    }
+    public void OpenSettings(View view){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnSettings()).commit();
     }
     @Override
     public void onBackPressed(){
@@ -66,6 +77,11 @@ public class MainView extends AppCompatActivity{
             case "NoConn":
                 this.finish();
                 break;
+            case "SetupConnStart":
+                this.finish();
+                break;
+            case "SetupConnMod":
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
         }
 
     }

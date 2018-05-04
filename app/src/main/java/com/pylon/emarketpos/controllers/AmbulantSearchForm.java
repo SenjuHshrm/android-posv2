@@ -3,6 +3,7 @@ package com.pylon.emarketpos.controllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
+import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -102,12 +104,14 @@ public class AmbulantSearchForm extends Fragment{
         protected String doInBackground(String... param) {
             String xhrRes;
             String url;
+            String ip_host = "http://" + getIp();
+            ip_host = ip_host + "/get-info/ambulant/";
             try{
                 if(param[0].contains(" ")){
                     String[] params = param[0].split(" ");
-                    url = "http://192.168.143.24/get-info/ambulant/" + params[0] + "%20" + params[1];
+                    url = ip_host + params[0] + "%20" + params[1];
                 }else{
-                    url = "http://192.168.143.24/get-info/ambulant/" + param[0];
+                    url = ip_host + param[0];
                 }
                 StringBuilder builder = new StringBuilder();
                 HttpGet httpGet = new HttpGet(url);
@@ -161,6 +165,15 @@ public class AmbulantSearchForm extends Fragment{
             }
             SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness});
             AmbListView.setAdapter(adapter);
+        }
+        private String getIp(){
+            DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
+            Cursor CurIP = dbHelp.selectIP();
+            StringBuilder StrBf = new StringBuilder();
+            while(CurIP.moveToNext()) {
+                StrBf.append(CurIP.getString(0));
+            }
+            return StrBf.toString();
         }
     }
 

@@ -3,6 +3,7 @@ package com.pylon.emarketpos.controllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
+import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -107,9 +109,11 @@ public class StallSearchForm extends Fragment {
         @SuppressWarnings("deprecation")
         protected String doInBackground(String... strings) {
             String xhrRes;
+            String ip_host = "http://" + getIp();
+            ip_host = ip_host + "/get-info/stall/";
             try{
                 String encodedQuery = URLEncoder.encode(strings[0],"utf-8");
-                String url = "http://192.168.143.24/get-info/stall/" + encodedQuery;
+                String url = ip_host + encodedQuery;
                 StringBuilder builder = new StringBuilder();
                 HttpGet httpGet = new HttpGet(url);
                 HttpParams httpParameters = new BasicHttpParams();
@@ -163,6 +167,15 @@ public class StallSearchForm extends Fragment {
             }
             SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business});
             StallListView.setAdapter(adapter);
+        }
+        private String getIp(){
+            DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
+            Cursor CurIP = dbHelp.selectIP();
+            StringBuilder StrBf = new StringBuilder();
+            while(CurIP.moveToNext()) {
+                StrBf.append(CurIP.getString(0));
+            }
+            return StrBf.toString();
         }
 
     }

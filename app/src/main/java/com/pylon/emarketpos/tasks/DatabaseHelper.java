@@ -18,20 +18,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE ip_address(IP TEXT)");
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ip_address");
         onCreate(sqLiteDatabase);
     }
-
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME,null);
         return res;
     }
-
     public boolean insertData(String name){
         boolean res;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -48,5 +47,24 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void deleteData(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + TABLE_NAME);
+    }
+    public Cursor selectIP(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM ip_address", null);
+        return res;
+    }
+    public boolean saveIP(String ip){
+        boolean res;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contVal = new ContentValues();
+        contVal.put("IP",ip);
+        db.execSQL("DELETE FROM ip_address");
+        long response = db.insert("ip_address",null,contVal);
+        if(response == -1){
+            res = false;
+        }else{
+            res = true;
+        }
+        return res;
     }
 }

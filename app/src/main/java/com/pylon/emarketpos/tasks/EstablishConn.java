@@ -32,8 +32,10 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
     @Override
     protected String doInBackground(Void... voids) {
         String xhrRes;
+        String ip_host = "http://" + getIp();
+        ip_host = ip_host + "/connection-test";
         try{
-            url = new URL("http://192.168.143.24/connection-test");
+            url = new URL(ip_host);
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(20000);
@@ -84,5 +86,14 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
             }
         }
+    }
+    private String getIp(){
+        DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
+        Cursor CurIP = dbHelp.selectIP();
+        StringBuilder StrBf = new StringBuilder();
+        while(CurIP.moveToNext()) {
+            StrBf.append(CurIP.getString(0));
+        }
+        return StrBf.toString();
     }
 }

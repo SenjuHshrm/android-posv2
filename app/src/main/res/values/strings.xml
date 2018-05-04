@@ -29,6 +29,9 @@
     <string name="btnResetSearch">Reset</string>
     <string name="chkCon">Establishing connection&#8230;</string>
     <string name="noConWarn">No Connection</string>
+    <string name="SetIPlbl">Set IP Address to access market database</string>
+    <string name="IPSample">e.g. 192.168.1.1</string>
+    <string name="lblSaveSet">Save Settings</string>
     <string name="tryAgain"><a>Try Again</a></string>
     <item name="visible" type="id" />
     <item name="masked" type="id" />

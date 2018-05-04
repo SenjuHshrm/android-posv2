@@ -2,6 +2,7 @@ package com.pylon.emarketpos.tasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,8 +46,10 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String... params) {
         String xhrRes;
+        String ip_host = "http://" + getIp();
+        ip_host = ip_host + "/login";
         try{
-            url = new URL("http://192.168.143.24/login");
+            url = new URL(ip_host);
             conn = (HttpURLConnection)url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -112,5 +115,14 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             }
         }
         pLoading.dismiss();
+    }
+    private String getIp(){
+        DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
+        Cursor CurIP = dbHelp.selectIP();
+        StringBuilder StrBf = new StringBuilder();
+        while(CurIP.moveToNext()) {
+            StrBf.append(CurIP.getString(0));
+        }
+        return StrBf.toString();
     }
 }
