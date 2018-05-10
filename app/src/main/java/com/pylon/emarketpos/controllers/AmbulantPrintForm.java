@@ -39,7 +39,7 @@ public class AmbulantPrintForm extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        TextView DevUser = (TextView) getActivity().findViewById(R.id.DeviceUserDisplay);
+        TextView DevUser = (TextView) getActivity().findViewById(R.id.device_user);
         final String pOwnerName = OwnerName.getText().toString();
         final String pBusiness = Business.getText().toString();
         final String pAmount = Amount.getText().toString();

@@ -71,7 +71,11 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                     if(instance != null){
                         return;
                     }
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,0).replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
+                    Fragment loginFrag = new LoginFrag();
+                    Bundle info = new Bundle();
+                    info.putString("pageStat", mFrag.getResources().getString(R.string.lblBtnLogin));
+                    loginFrag.setArguments(info);
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,0).replace(R.id.fragment_container, loginFrag,"LoginForm").commit();
                 }
             }else{
                 StringBuilder buffer = new StringBuilder();
@@ -79,10 +83,10 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                     buffer.append(curs.getString(0));
                 }
                 DeviceUser devUser = new DeviceUser();
-                Bundle x = new Bundle();
-                x.putString("Account",buffer.toString());
-                devUser.setArguments(x);
-                mFrag.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.user_container, devUser).commit();
+                Bundle user = new Bundle();
+                user.putString("DevUser", buffer.toString());
+                devUser.setArguments(user);
+                mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.devuser_con, devUser, "MainApp").commit();
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
             }
         }

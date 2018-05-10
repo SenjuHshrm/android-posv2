@@ -40,7 +40,7 @@ public class StallPrintForm extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        TextView DevUser = (TextView) getActivity().findViewById(R.id.DeviceUserDisplay);
+        TextView DevUser = (TextView) getActivity().findViewById(R.id.device_user);
         final String pStallNum = StallNum.getText().toString();
         final String pOwnerName = OwnerName.getText().toString();
         final String pBusiness = BusinessType.getText().toString();

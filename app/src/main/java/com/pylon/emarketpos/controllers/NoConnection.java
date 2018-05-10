@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.pylon.emarketpos.R;
 
@@ -20,6 +21,8 @@ public class NoConnection extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_no_connection, container, false);
+        ImageButton settings = (ImageButton) getActivity().findViewById(R.id.openSettings);
+        settings.setEnabled(true);
         Button tryRec = (Button) view.findViewById(R.id.tryRecon);
         tryRec.setOnClickListener(new View.OnClickListener() {
             @Override

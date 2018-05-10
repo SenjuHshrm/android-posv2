@@ -8,35 +8,38 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.pylon.emarketpos.controllers.*;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 public class MainView extends AppCompatActivity{
+
+    private TextView devUser, pageStat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
+        devUser = (TextView) findViewById(R.id.device_user);
+        pageStat = (TextView) findViewById(R.id.pageStat);
         DatabaseHelper DBHelp = new DatabaseHelper(this);
         Cursor getIP = DBHelp.selectIP();
         if(getIP.getCount() == 0){
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new ConnSettings(), "SetupConnStart").commit();
+            pageStat.setText("SETTINGS");
         }else{
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection()).commit();
         }
     }
     public void OpenSettings(View view){
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ConnSettings(), "SetupConnMod").commit();
+        pageStat.setText("SETTINGS");
     }
     @Override
     public void onBackPressed(){
         final DatabaseHelper dbHelper;
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
-        final ToolbarFrag tbFrag = new ToolbarFrag();
-        final DeviceUser devUser = new DeviceUser();
-        final Bundle DevUser = new Bundle();
-        final Bundle bn = new Bundle();
         switch(currentFragment.getTag()){
             case "MainApp":
                 dbHelper = new DatabaseHelper(this);
@@ -46,13 +49,13 @@ public class MainView extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dbHelper.deleteData();
-                        bn.putString("Stat",getString(R.string.lblBtnLogin));
-                        DevUser.putString("Account","");
-                        tbFrag.setArguments(bn);
-                        devUser.setArguments(DevUser);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.user_container,tbFrag).commit();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.user_container,devUser).commit();
+                        DeviceUser DevUse = new DeviceUser();
+                        Bundle user = new Bundle();
+                        user.putString("DevUser", "");
+                        DevUse.setArguments(user);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.devuser_con, DevUse).commit();
                         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new LoginFrag(),"LoginForm").commit();
+                        pageStat.setText(R.string.lblBtnLogin);
                     }
                 });
                 builder.setNegativeButton("Cancel",null);
@@ -61,15 +64,19 @@ public class MainView extends AppCompatActivity{
                 break;
             case "AmbulantSearch":
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
+                pageStat.setText(R.string.toolbarTitleMenu);
                 break;
             case "StallSearch":
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new MainApp(),"MainApp").commit();
+                pageStat.setText(R.string.toolbarTitleMenu);
                 break;
             case "StallPrint":
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                pageStat.setText(R.string.lblStallList);
                 break;
             case "AmbulantPrint":
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new AmbulantSearchForm(),"AmbulantSearch").commit();
+                pageStat.setText(R.string.lblAmbList);
                 break;
             case "LoginForm":
                 this.finish();
@@ -82,6 +89,7 @@ public class MainView extends AppCompatActivity{
                 break;
             case "SetupConnMod":
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
+                pageStat.setText("");
                 break;
 
         }

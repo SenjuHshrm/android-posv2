@@ -100,16 +100,12 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
         }else{
             if(response == true){
-                MainApp mApp = new MainApp();
                 DeviceUser devUser = new DeviceUser();
-                Bundle bundle = new Bundle();
-                bundle.putString("Account",res);
-                FragmentManager frMn1 = mFrag.getActivity().getSupportFragmentManager();
-                FragmentTransaction trns1 = frMn1.beginTransaction();
-                devUser.setArguments(bundle);
-                trns1.replace(R.id.user_container,devUser);
-                trns1.commit();
-                mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,mApp,"MainApp").commit();
+                Bundle user = new Bundle();
+                user.putString("DevUser", res);
+                devUser.setArguments(user);
+                mFrag.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.devuser_con, devUser).commit();
+                mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,new MainApp(),"MainApp").commit();
             }else{
                 Toast.makeText(mContext,"An error occured",Toast.LENGTH_LONG).show();
             }

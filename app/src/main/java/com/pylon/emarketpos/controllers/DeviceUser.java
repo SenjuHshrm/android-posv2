@@ -10,23 +10,20 @@ import android.widget.TextView;
 
 import com.pylon.emarketpos.R;
 
-
 public class DeviceUser extends Fragment {
+
 
     public DeviceUser() {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_device_user, container, false);
-        TextView DevUser = (TextView) view.findViewById(R.id.DeviceUserDisplay);
-        Bundle bundle = getArguments();
-        String dev = bundle.getString("Account");
-        DevUser.setText(dev);
+        TextView devUser = view.findViewById(R.id.device_user);
+        Bundle user = getArguments();
+        devUser.setText(user.getString("DevUser"));
         return view;
     }
 
