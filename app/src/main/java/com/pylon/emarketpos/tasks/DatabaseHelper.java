@@ -7,8 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper{
-    private static final String DATABASE_NAME = "logged_user";
+    private static final String DATABASE_NAME = "logged_user.db";
     private static final String TABLE_NAME = "user";
+    private static final String  COL_0 = "user_id";
     private static final String  COL_1 = "name";
     private static final int DB_VERSION= 1;
     public DatabaseHelper(Context context){
@@ -17,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + "(" + COL_0 + " TEXT," + COL_1 + " TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE ip_address(IP TEXT)");
     }
     @Override
@@ -28,13 +29,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME,null);
+        Cursor res = db.rawQuery("select name from " + TABLE_NAME,null);
         return res;
     }
-    public boolean insertData(String name){
+    public boolean insertData(String name, String id){
         boolean res;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contVal = new ContentValues();
+        contVal.put(COL_0,id);
         contVal.put(COL_1,name);
         long response = db.insert(TABLE_NAME,null,contVal);
         if(response == -1){
@@ -66,5 +68,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             res = true;
         }
         return res;
+    }
+    public String getID(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor query = db.rawQuery("select " + COL_0 + " from " + TABLE_NAME,null);
+        StringBuilder strBuilder = new StringBuilder();
+        while(query.moveToNext()){
+            strBuilder.append(query.getString(0));
+        }
+        return strBuilder.toString();
     }
 }

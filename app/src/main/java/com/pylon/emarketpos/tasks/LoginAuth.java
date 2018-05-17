@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,10 @@ import android.util.Log;
 import android.widget.Toast;
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.controllers.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -22,6 +27,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 public class LoginAuth extends AsyncTask<String,String,String> {
     private Context mContext;
@@ -46,6 +52,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String... params) {
         String xhrRes;
+        String[] xhrRes1 = new String[2];
         String ip_host = "http://" + getIp();
         ip_host = ip_host + "/login";
         try{
@@ -79,10 +86,14 @@ public class LoginAuth extends AsyncTask<String,String,String> {
                 }
                 xhrRes = StrRes.toString();
             }else{
-                xhrRes = "unsuccessful";
+                xhrRes1[0] = "";
+                xhrRes1[1] = "unsuccessful";
+                xhrRes = Arrays.toString(xhrRes1);
             }
         }catch(Exception e){
-            xhrRes = "exception";
+            xhrRes1[0] = "";
+            xhrRes1[1] = "exception";
+            xhrRes = Arrays.toString(xhrRes1);
         }finally{
             conn.disconnect();
         }
@@ -90,19 +101,20 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     }
     @Override
     protected void onPostExecute(String res){
+        String[] test = getResponse(res);
         dbHelper = new DatabaseHelper(mContext);
-        boolean response = dbHelper.insertData(res);
-        if(res.equalsIgnoreCase("NoUsername")){
+        if(test[1].equalsIgnoreCase("NoUsername")){
             Toast.makeText(mContext,"Username not registered.",Toast.LENGTH_LONG).show();
-        }else if(res.equalsIgnoreCase("PassInc")){
+        }else if(test[1].equalsIgnoreCase("PassInc")){
             Toast.makeText(mContext,"Password mismatched.",Toast.LENGTH_LONG).show();
-        }else if(res.equalsIgnoreCase("exception") || res.equalsIgnoreCase("unsuccessful")){
+        }else if(test[1].equalsIgnoreCase("exception") || test[1].equalsIgnoreCase("unsuccessful")){
             Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
         }else{
+            boolean response = dbHelper.insertData(test[1], test[0]);
             if(response == true){
                 DeviceUser devUser = new DeviceUser();
                 Bundle user = new Bundle();
-                user.putString("DevUser", res);
+                user.putString("DevUser", test[1]);
                 devUser.setArguments(user);
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.devuser_con, devUser).commit();
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,new MainApp(),"MainApp").commit();
@@ -120,5 +132,17 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             StrBf.append(CurIP.getString(0));
         }
         return StrBf.toString();
+    }
+    private String[] getResponse(CharSequence req){
+        String[] res = new String[2];
+        try{
+            JSONArray data = new JSONObject(req.toString()).getJSONArray("USER");
+            JSONObject xobj = data.getJSONObject(0);
+            res[0] = xobj.getString("ID");
+            res[1] = xobj.getString("fullname");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
     }
 }

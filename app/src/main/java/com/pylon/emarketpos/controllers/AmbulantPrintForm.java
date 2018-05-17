@@ -17,6 +17,7 @@ public class AmbulantPrintForm extends Fragment implements View.OnClickListener{
     private EditText OwnerName, Business, Amount;
     private Button ambPrint;
     private String[] SendInfo;
+    private String CustID;
     public AmbulantPrintForm() {
 
     }
@@ -33,6 +34,7 @@ public class AmbulantPrintForm extends Fragment implements View.OnClickListener{
         ambPrint = (Button) view.findViewById(R.id.btnPrintAmb);
         OwnerName.setText(x.getString("AmbOwner"));
         Business.setText(x.getString("AmbBusiness"));
+        CustID = x.getString("CustomerID");
         ambPrint.setOnClickListener(this);
         return view;
     }
@@ -49,6 +51,7 @@ public class AmbulantPrintForm extends Fragment implements View.OnClickListener{
         SendInfo[2] = pBusiness;
         SendInfo[3] = pAmount;
         SendInfo[4] = DevUser.getText().toString();
+        SendInfo[5] = CustID;
         new SavePayment(getContext(),this).execute(SendInfo);
     }
 }

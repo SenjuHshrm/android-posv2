@@ -74,10 +74,12 @@ public class AmbulantSearchForm extends Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView AmbOwner = (TextView) view.findViewById(R.id.List_AmbOwner);
                 TextView AmbBusiness = (TextView) view.findViewById(R.id.List_AmbBusiness);
+                TextView ID = (TextView) view.findViewById(R.id.List_CustomerID_A);
                 AmbulantPrintForm ambPrintForm = new AmbulantPrintForm();
                 Bundle x = new Bundle();
                 x.putString("AmbOwner",AmbOwner.getText().toString());
                 x.putString("AmbBusiness",AmbBusiness.getText().toString());
+                x.putString("CustomerID", ID.getText().toString());
                 ambPrintForm.setArguments(x);
                 getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
             }
@@ -156,14 +158,15 @@ public class AmbulantSearchForm extends Fragment{
                 for(int i = 0; i < AmbList.length(); i++){
                     JSONObject post = AmbList.getJSONObject(i);
                     Map<String,String> datum = new HashMap<String,String>(2);
-                    datum.put("OwnerName", post.getString("Ambulant Owner"));
-                    datum.put("BusinessNat",post.getString("Business"));
+                    datum.put("OwnerName", post.getString("Name"));
+                    datum.put("BusinessNat",post.getString("Location"));
+                    datum.put("ID", post.getString("ID"));
                     data.add(datum);
                 }
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness});
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat", "ID"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness, R.id.List_CustomerID_A});
             AmbListView.setAdapter(adapter);
         }
         private String getIp(){

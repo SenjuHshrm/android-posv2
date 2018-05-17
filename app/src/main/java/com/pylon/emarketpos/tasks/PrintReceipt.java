@@ -66,13 +66,13 @@ public class PrintReceipt {
             String Type = "Stall Payment";
             String printInfo = "\n" +
                     "Stall Number: " + RecInfo[1] + "\n" +
-                    "Owner Name: " + RecInfo[2] + "\n" +
-                    "Business: " + RecInfo[3] + "\n" +
-                    "Amount to Pay: P " + RecInfo[4] + "\n" +
+                    "Owner Name: " + RecInfo[6] + "\n" +
+                    "Business: " + RecInfo[2] + "\n" +
+                    "Amount to Pay: P " + RecInfo[3] + "\n" +
                     divider  + "\n" +
                     "Date: " + getDateTime() + "\n" +
                     "Transaction Number: " + TransactNum + "\n" +
-                    "Collector: " + RecInfo[5] + "\n" +
+                    "Collector: " + RecInfo[4] + "\n" +
                     feedLine;
             IntentPrint(Type, printInfo);
         }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Toast;
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.controllers.AmbulantSearchForm;
@@ -29,6 +30,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
     private JSONObject jsonObj;
     private OutputStream os;
     private InputStream is;
+    DatabaseHelper dbHelp;
     public SavePayment(Context context, Fragment fragment){
         this.mContext = context;
         this.mFrag = fragment;
@@ -51,23 +53,21 @@ public class SavePayment extends AsyncTask<String,String,String> {
             RecInfo[i] = param[i];
         }
         try{
+            dbHelp = new DatabaseHelper(mFrag.getActivity());
             url = new URL(ip_host);
             jsonObj = new JSONObject();
             switch(TrnsType){
                 case "stall":
-                    jsonObj.put("Type",param[0]);
-                    jsonObj.put("StNum",param[1]);
-                    jsonObj.put("OwnerName",param[2]);
-                    jsonObj.put("Business",param[3]);
-                    jsonObj.put("Payment",param[4]);
-                    jsonObj.put("Collector",param[5]);
+                    jsonObj.put("Payment",param[3]);
+                    jsonObj.put("CollectorID",dbHelp.getID());
+                    jsonObj.put("CollectorName", param[4]);
+                    jsonObj.put("CustomerID",param[5]);
                     break;
                 case "ambulant":
-                    jsonObj.put("Type",param[0]);
-                    jsonObj.put("OwnerName",param[1]);
-                    jsonObj.put("Business",param[2]);
                     jsonObj.put("Payment",param[3]);
-                    jsonObj.put("Collector",param[4]);
+                    jsonObj.put("CollectorID",dbHelp.getID());
+                    jsonObj.put("CollectorName",param[4]);
+                    jsonObj.put("CustomerID",param[5]);
                     break;
             }
             RequestData = jsonObj.toString();
@@ -97,12 +97,14 @@ public class SavePayment extends AsyncTask<String,String,String> {
             }
         }catch(Exception e){
             xhrRes = "conErr";
+            e.printStackTrace();
         }
         return xhrRes;
     }
     @Override
     public void onPostExecute(String res){
         pLoading.dismiss();
+        Log.d("Response", res);
         if(res.equalsIgnoreCase("false") ||
                 res.equalsIgnoreCase("conErr")){
             Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_LONG).show();
@@ -119,7 +121,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
         }
     }
     private String getIp(){
-        DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
+        dbHelp = new DatabaseHelper(mFrag.getActivity());
         Cursor CurIP = dbHelp.selectIP();
         StringBuilder StrBf = new StringBuilder();
         while(CurIP.moveToNext()) {

@@ -79,11 +79,13 @@ public class StallSearchForm extends Fragment {
                 TextView StallNumber = (TextView) view.findViewById(R.id.List_StallNum);
                 TextView OwnerName = (TextView) view.findViewById(R.id.List_Name);
                 TextView BusinessType = (TextView) view.findViewById(R.id.List_Business);
+                TextView CustID = (TextView) view.findViewById(R.id.List_CustomerID_S);
                 StallPrintForm stallPrintForm = new StallPrintForm();
                 Bundle x = new Bundle();
                 x.putString("StallNumber",StallNumber.getText().toString());
                 x.putString("OwnerName",OwnerName.getText().toString());
                 x.putString("BusinessType",BusinessType.getText().toString());
+                x.putString("CustomerID",CustID.getText().toString());
                 stallPrintForm.setArguments(x);
                 getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
             }
@@ -160,12 +162,13 @@ public class StallSearchForm extends Fragment {
                     datum.put("StallNum",post.getString("Stall No."));
                     datum.put("Tenant",post.getString("Name"));
                     datum.put("Business",post.getString("Business"));
+                    datum.put("CustomerID", Integer.toString(post.getInt("ID")));
                     data.add(datum);
                 }
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business});
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business","CustomerID"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business,R.id.List_CustomerID_S});
             StallListView.setAdapter(adapter);
         }
         private String getIp(){

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.EstablishConn;
@@ -20,10 +21,13 @@ public class CheckConnection extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_check_connection, container, false);
         new EstablishConn(getContext(),savedInstanceState, this).execute();
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
         settBtn.setEnabled(false);
-        return inflater.inflate(R.layout.fragment_check_connection, container, false);
+        TextView stat = (TextView) getActivity().findViewById(R.id.pageStat);
+        stat.setText("");
+        return view;
     }
 
 }

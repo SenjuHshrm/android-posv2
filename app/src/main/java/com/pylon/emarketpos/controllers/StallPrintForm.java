@@ -17,6 +17,7 @@ public class StallPrintForm extends Fragment implements View.OnClickListener{
     private EditText StallNum, OwnerName, BusinessType, Amount;
     private Button stallPrint;
     private String[] SendInfo;
+    private String CustID;
     public StallPrintForm() {
 
     }
@@ -34,6 +35,7 @@ public class StallPrintForm extends Fragment implements View.OnClickListener{
         StallNum.setText(x.getString("StallNumber"));
         OwnerName.setText(x.getString("OwnerName"));
         BusinessType.setText(x.getString("BusinessType"));
+        CustID = x.getString("CustomerID");
         stallPrint.setOnClickListener(this);
         return view;
     }
@@ -48,10 +50,11 @@ public class StallPrintForm extends Fragment implements View.OnClickListener{
         SendInfo = new String[10];
         SendInfo[0] = "stall";
         SendInfo[1] = pStallNum;
-        SendInfo[2] = pOwnerName;
-        SendInfo[3] = pBusiness;
-        SendInfo[4] = pAmount;
-        SendInfo[5] = DevUser.getText().toString();
+        SendInfo[2] = pBusiness;
+        SendInfo[3] = pAmount;
+        SendInfo[4] = DevUser.getText().toString();
+        SendInfo[5] = CustID;
+        SendInfo[6] = pOwnerName;
         new SavePayment(getContext(),this).execute(SendInfo);
     }
 }
