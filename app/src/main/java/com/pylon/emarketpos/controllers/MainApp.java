@@ -25,7 +25,6 @@ public class MainApp extends Fragment{
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
         settBtn.setEnabled(true);
         pageStat = (TextView) getActivity().findViewById(R.id.pageStat);
-        Bundle info = getArguments();
         pageStat.setText(getResources().getString(R.string.toolbarTitleMenu));
         StallColl = (Button) view.findViewById(R.id.StallColl);
         AmbColl = (Button) view.findViewById(R.id.AmbulantColl);

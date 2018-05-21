@@ -6,13 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by imrankst1221@gmail.com
- *
- */
-
 public class Utils {
-    // UNICODE 0x23 = #
     public static final byte[] UNICODE_TEXT = new byte[] {0x23, 0x23, 0x23,
             0x23, 0x23, 0x23,0x23, 0x23, 0x23,0x23, 0x23, 0x23,0x23, 0x23, 0x23,
             0x23, 0x23, 0x23,0x23, 0x23, 0x23,0x23, 0x23, 0x23,0x23, 0x23, 0x23,
@@ -51,7 +45,6 @@ public class Utils {
                 int g = (color >> 8) & 0xff;
                 int b = color & 0xff;
 
-                // if color close to white，bit='0', else bit='1'
                 if (r > 160 && g > 160 && b > 160)
                     sb.append("0");
                 else
