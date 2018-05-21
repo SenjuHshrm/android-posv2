@@ -21,23 +21,15 @@ import android.widget.Toast;
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +82,8 @@ public class AmbulantSearchForm extends Fragment{
     private class SearchData extends AsyncTask<String,String,String> {
         private Context mContext;
         private ProgressDialog pLoading;
+        private URL url;
+        private HttpURLConnection conn;
         private SearchData(Context context){
             this.mContext = context;
         }
@@ -102,43 +96,44 @@ public class AmbulantSearchForm extends Fragment{
             pLoading.show();
         }
         @Override
-        @SuppressWarnings("deprecation")
         protected String doInBackground(String... param) {
             String xhrRes;
-            String url;
+            String reqURL;
             String ip_host = "http://" + getIp();
             ip_host = ip_host + "/get-info/ambulant/";
             try{
                 if(param[0].contains(" ")){
                     String[] params = param[0].split(" ");
-                    url = ip_host + params[0] + "%20" + params[1];
+                    reqURL = ip_host + params[0] + "%20" + params[1];
                 }else{
-                    url = ip_host + param[0];
+                    reqURL = ip_host + param[0];
                 }
-                StringBuilder builder = new StringBuilder();
-                HttpGet httpGet = new HttpGet(url);
-                HttpParams httpParameters = new BasicHttpParams();
-                HttpConnectionParams.setConnectionTimeout(httpParameters,15000);
-                HttpConnectionParams.setSoTimeout(httpParameters,10000);
-                HttpClient client = new DefaultHttpClient(httpParameters);
-                HttpResponse response = client.execute(httpGet);
-                StatusLine statLine = response.getStatusLine();
-                int statCode = statLine.getStatusCode();
-                if(statCode == 200){
-                    HttpEntity entity = response.getEntity();
-                    InputStream content = entity.getContent();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                url  = new URL(reqURL);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.connect();
+                int response = conn.getResponseCode();
+                if(response == HttpURLConnection.HTTP_OK){
+                    InputStream input = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    StringBuilder StrRes = new StringBuilder();
                     String line;
                     while((line = reader.readLine()) != null){
-                        builder.append(line);
+                        StrRes.append(line);
                     }
-                    xhrRes = builder.toString();
+                    xhrRes = StrRes.toString();
                 }else{
                     xhrRes = "conErr";
                 }
-            }catch(IOException ioEx){
+            }catch(Exception ioEx){
                 ioEx.printStackTrace();
                 xhrRes = "exception";
+            }finally {
+                conn.disconnect();
             }
             return xhrRes;
         }
