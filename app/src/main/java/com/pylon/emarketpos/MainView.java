@@ -15,12 +15,11 @@ import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 public class MainView extends AppCompatActivity{
 
-    private TextView devUser, pageStat;
+    private TextView pageStat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_view);
-        devUser = (TextView) findViewById(R.id.device_user);
         pageStat = (TextView) findViewById(R.id.pageStat);
         DatabaseHelper DBHelp = new DatabaseHelper(this);
         Cursor getIP = DBHelp.selectIP();

@@ -32,12 +32,16 @@ public class ConnSettings extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         EditText GetIPAdd = (EditText) getActivity().findViewById(R.id.SetIP);
         String ipAdd = GetIPAdd.getText().toString();
-        DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
-        boolean res = dbHelp.saveIP(ipAdd);
-        if(res == true){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
-        }else if(res == false){
-            Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_LONG).show();
+        if(ipAdd.isEmpty()){
+            Toast.makeText(getActivity(), "Empty input field.", Toast.LENGTH_SHORT).show();
+        } else {
+            DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
+            boolean res = dbHelp.saveIP(ipAdd);
+            if(res){
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
+            }else{
+                Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
