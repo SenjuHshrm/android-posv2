@@ -107,7 +107,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
             Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
         }else{
             boolean response = dbHelper.insertData(test[1], test[0]);
-            if(response == true){
+            if(response){
                 DeviceUser devUser = new DeviceUser();
                 Bundle user = new Bundle();
                 user.putString("DevUser", test[1]);
