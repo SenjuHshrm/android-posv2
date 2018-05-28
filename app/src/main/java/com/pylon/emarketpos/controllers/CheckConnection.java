@@ -23,7 +23,7 @@ public class CheckConnection extends Fragment {
         View view = inflater.inflate(R.layout.fragment_check_connection, container, false);
         new EstablishConn(getContext(),savedInstanceState, this).execute();
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
-        settBtn.setEnabled(false);
+        settBtn.setVisibility(View.INVISIBLE);
         TextView stat = (TextView) getActivity().findViewById(R.id.pageStat);
         stat.setText("");
         return view;

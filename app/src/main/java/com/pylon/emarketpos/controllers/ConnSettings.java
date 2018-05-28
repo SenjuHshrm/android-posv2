@@ -24,7 +24,7 @@ public class ConnSettings extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_conn_settings, container, false);
         Button saveSettings = (Button) view.findViewById(R.id.btnSaveSett);
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
-        settBtn.setEnabled(false);
+        settBtn.setVisibility(View.INVISIBLE);
         saveSettings.setOnClickListener(this);
         return view;
     }

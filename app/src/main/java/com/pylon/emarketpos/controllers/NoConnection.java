@@ -22,7 +22,7 @@ public class NoConnection extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_no_connection, container, false);
         ImageButton settings = (ImageButton) getActivity().findViewById(R.id.openSettings);
-        settings.setEnabled(true);
+        settings.setVisibility(View.VISIBLE);
         Button tryRec = (Button) view.findViewById(R.id.tryRecon);
         tryRec.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,7 +23,7 @@ public class MainApp extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_app, container, false);
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
-        settBtn.setEnabled(true);
+        settBtn.setVisibility(View.VISIBLE);
         pageStat = (TextView) getActivity().findViewById(R.id.pageStat);
         pageStat.setText(getResources().getString(R.string.toolbarTitleMenu));
         StallColl = (Button) view.findViewById(R.id.StallColl);

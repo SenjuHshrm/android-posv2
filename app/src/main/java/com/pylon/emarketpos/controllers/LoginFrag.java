@@ -26,7 +26,7 @@ public class LoginFrag extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
-        settBtn.setEnabled(true);
+        settBtn.setVisibility(View.VISIBLE);
         TextView pageStat = (TextView) getActivity().findViewById(R.id.pageStat);
         pageStat.setText(getResources().getString(R.string.lblBtnLogin));
         username = (EditText) view.findViewById(R.id.UsernameInput);
