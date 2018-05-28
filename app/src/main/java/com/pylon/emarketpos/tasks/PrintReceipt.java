@@ -99,7 +99,7 @@ public class PrintReceipt {
             socket.close();
         }catch(Exception e){
             value+="2 There is something wrong with your device please contact your ADMIN \n";
-            Toast.makeText(mContext, value, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show();
         }
     }
     private void InitPrinter(){
@@ -128,11 +128,11 @@ public class PrintReceipt {
                 beginListenForData();
             }else{
                 value+="No Devices found";
-                Toast.makeText(mContext,value,Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,value,Toast.LENGTH_SHORT).show();
             }
         }catch(Exception e){
             value+="1 There is something wrong with your device please contact your ADMIN \n";
-            Toast.makeText(mContext, value, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show();
         }
     }
     private void beginListenForData(){

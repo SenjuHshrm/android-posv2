@@ -57,7 +57,7 @@ public class StallSearchForm extends Fragment {
             public void onClick(View view) {
                 final String reqData = inputReq.getText().toString();
                 if(reqData.equals("")){
-                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
                 }else{
                     new SearchData(getContext()).execute(reqData);
                 }
@@ -135,7 +135,7 @@ public class StallSearchForm extends Fragment {
         @Override
         protected void onPostExecute(String res){
             if(res.equalsIgnoreCase("conErr") || res.equalsIgnoreCase("exception")){
-                Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_SHORT).show();
             }else{
                 ConstructList(res);
             }
@@ -155,7 +155,7 @@ public class StallSearchForm extends Fragment {
                     data.add(datum);
                 }
             }catch(JSONException JSONEx){
-                Toast.makeText(mContext,"There was an error parsing the data.",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"Data not found.",Toast.LENGTH_SHORT).show();
             }
             SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business","CustomerID"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business,R.id.List_CustomerID_S});
             StallListView.setAdapter(adapter);

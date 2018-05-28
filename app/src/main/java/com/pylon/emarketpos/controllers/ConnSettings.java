@@ -40,7 +40,7 @@ public class ConnSettings extends Fragment implements View.OnClickListener{
             if(res){
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
             }else{
-                Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_SHORT).show();
             }
         }
     }

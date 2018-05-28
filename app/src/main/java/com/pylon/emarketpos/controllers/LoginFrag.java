@@ -38,7 +38,7 @@ public class LoginFrag extends Fragment{
                 final String getUsername = username.getText().toString();
                 final String getPassword = password.getText().toString();
                 if(getUsername.equalsIgnoreCase("") || getPassword.equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(),"Please input required fields",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Please input required fields",Toast.LENGTH_SHORT).show();
                 }else {
                     new LoginAuth(view.getContext(), LoginFrag.this).execute(getUsername, getPassword);
                 }

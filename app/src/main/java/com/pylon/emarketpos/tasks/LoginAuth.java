@@ -100,11 +100,11 @@ public class LoginAuth extends AsyncTask<String,String,String> {
         String[] test = getResponse(res);
         dbHelper = new DatabaseHelper(mContext);
         if(test[1].equalsIgnoreCase("NoUsername")){
-            Toast.makeText(mContext,"Username not registered.",Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Username not registered.",Toast.LENGTH_SHORT).show();
         }else if(test[1].equalsIgnoreCase("PassInc")){
-            Toast.makeText(mContext,"Password mismatched.",Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Password mismatched.",Toast.LENGTH_SHORT).show();
         }else if(test[1].equalsIgnoreCase("exception") || test[1].equalsIgnoreCase("unsuccessful")){
-            Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Could not establish connection to the server.",Toast.LENGTH_SHORT).show();
         }else{
             boolean response = dbHelper.insertData(test[1], test[0]);
             if(response){
@@ -115,7 +115,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.devuser_con, devUser).commit();
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container,new MainApp(),"MainApp").commit();
             }else{
-                Toast.makeText(mContext,"An error occured",Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"An error occured",Toast.LENGTH_SHORT).show();
             }
         }
         pLoading.dismiss();

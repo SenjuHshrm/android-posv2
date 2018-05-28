@@ -107,7 +107,7 @@ public class SavePayment extends AsyncTask<String,String,String> {
         Log.d("Response", res);
         if(res.equalsIgnoreCase("false") ||
                 res.equalsIgnoreCase("conErr")){
-            Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_SHORT).show();
         } else {
             new PrintReceipt(mContext).PrintReceiptPrep(TrnsType,RecInfo,res);
             switch(TrnsType){
