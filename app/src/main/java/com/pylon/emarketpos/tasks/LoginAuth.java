@@ -122,12 +122,7 @@ public class LoginAuth extends AsyncTask<String,String,String> {
     }
     private String getIp(){
         DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
-        Cursor CurIP = dbHelp.selectIP();
-        StringBuilder StrBf = new StringBuilder();
-        while(CurIP.moveToNext()) {
-            StrBf.append(CurIP.getString(0));
-        }
-        return StrBf.toString();
+        return dbHelp.selectIP();
     }
     private String[] getResponse(CharSequence req){
         String[] res = new String[2];

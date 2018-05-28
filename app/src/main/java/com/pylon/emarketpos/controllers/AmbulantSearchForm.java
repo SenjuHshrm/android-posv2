@@ -166,12 +166,7 @@ public class AmbulantSearchForm extends Fragment{
         }
         private String getIp(){
             DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
-            Cursor CurIP = dbHelp.selectIP();
-            StringBuilder StrBf = new StringBuilder();
-            while(CurIP.moveToNext()) {
-                StrBf.append(CurIP.getString(0));
-            }
-            return StrBf.toString();
+            return dbHelp.selectIP();
         }
     }
 

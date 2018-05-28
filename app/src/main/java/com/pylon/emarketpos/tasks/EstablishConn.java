@@ -65,8 +65,8 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
             mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NoConnection(),"NoConn").commit();
         }else if(res.equalsIgnoreCase("ok")){
             dbHelper = new DatabaseHelper(mContext);
-            Cursor curs = dbHelper.getAllData();
-            if(curs.getCount() == 0){
+            String curs = dbHelper.getAllData();
+            if(curs.equals("")){
                 if(mFrag.getActivity().findViewById(R.id.fragment_container) != null){
                     if(instance != null){
                         return;
@@ -78,13 +78,9 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
                     mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,0).replace(R.id.fragment_container, loginFrag,"LoginForm").commit();
                 }
             }else{
-                StringBuilder buffer = new StringBuilder();
-                while(curs.moveToNext()){
-                    buffer.append(curs.getString(0));
-                }
                 DeviceUser devUser = new DeviceUser();
                 Bundle user = new Bundle();
-                user.putString("DevUser", buffer.toString());
+                user.putString("DevUser", curs);
                 devUser.setArguments(user);
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.devuser_con, devUser, "MainApp").commit();
                 mFrag.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
@@ -93,11 +89,6 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
     }
     private String getIp(){
         DatabaseHelper dbHelp = new DatabaseHelper(mFrag.getActivity());
-        Cursor CurIP = dbHelp.selectIP();
-        StringBuilder StrBf = new StringBuilder();
-        while(CurIP.moveToNext()) {
-            StrBf.append(CurIP.getString(0));
-        }
-        return StrBf.toString();
+        return dbHelp.selectIP();
     }
 }

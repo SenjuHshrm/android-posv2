@@ -22,8 +22,8 @@ public class MainView extends AppCompatActivity{
         setContentView(R.layout.activity_main_view);
         pageStat = (TextView) findViewById(R.id.pageStat);
         DatabaseHelper DBHelp = new DatabaseHelper(this);
-        Cursor getIP = DBHelp.selectIP();
-        if(getIP.getCount() == 0){
+        String getIP = DBHelp.selectIP();
+        if(getIP.equals("")){
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new ConnSettings(), "SetupConnStart").commit();
             pageStat.setText("SETTINGS");
         }else{

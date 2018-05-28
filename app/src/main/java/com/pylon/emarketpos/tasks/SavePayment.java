@@ -122,11 +122,6 @@ public class SavePayment extends AsyncTask<String,String,String> {
     }
     private String getIp(){
         dbHelp = new DatabaseHelper(mFrag.getActivity());
-        Cursor CurIP = dbHelp.selectIP();
-        StringBuilder StrBf = new StringBuilder();
-        while(CurIP.moveToNext()) {
-            StrBf.append(CurIP.getString(0));
-        }
-        return StrBf.toString();
+        return dbHelp.selectIP();
     }
 }

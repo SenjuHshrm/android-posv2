@@ -27,10 +27,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS ip_address");
         onCreate(sqLiteDatabase);
     }
-    public Cursor getAllData(){
+    public String getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select name from " + TABLE_NAME,null);
-        return res;
+        StringBuilder str = new StringBuilder();
+        while(res.moveToNext()){
+            str.append(res.getString(0));
+        }
+        res.close();
+        return str.toString();
     }
     public boolean insertData(String name, String id){
         boolean res;
@@ -50,10 +55,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + TABLE_NAME);
     }
-    public Cursor selectIP(){
+    public String selectIP(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM ip_address", null);
-        return res;
+        StringBuilder strBld = new StringBuilder();
+        while(res.moveToNext()){
+            strBld.append(res.getString(0));
+        }
+        res.close();
+        return strBld.toString();
     }
     public boolean saveIP(String ip){
         boolean res;
@@ -76,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         while(query.moveToNext()){
             strBuilder.append(query.getString(0));
         }
+        query.close();
         return strBuilder.toString();
     }
 }
