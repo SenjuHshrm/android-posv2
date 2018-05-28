@@ -37,8 +37,8 @@ public class EstablishConn extends AsyncTask<Void,String,String> {
         try{
             url = new URL(ip_host);
             conn = (HttpURLConnection)url.openConnection();
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(20000);
+            conn.setReadTimeout(30000);
+            conn.setConnectTimeout(60000);
             conn.connect();
             int resCode = conn.getResponseCode();
             if(resCode == 200){
