@@ -3,7 +3,6 @@ package com.pylon.emarketpos.controllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

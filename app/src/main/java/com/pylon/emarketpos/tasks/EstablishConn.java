@@ -1,7 +1,6 @@
 package com.pylon.emarketpos.tasks;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

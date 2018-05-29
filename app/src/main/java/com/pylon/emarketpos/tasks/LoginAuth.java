@@ -2,7 +2,6 @@ package com.pylon.emarketpos.tasks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
