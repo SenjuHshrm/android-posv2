@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.pylon.emarketpos.R;
 
-public class NoConnection extends Fragment {
+public class NoConnection extends Fragment implements OnClickListener{
 
     public NoConnection() {
 
@@ -24,13 +25,12 @@ public class NoConnection extends Fragment {
         ImageButton settings = (ImageButton) getActivity().findViewById(R.id.openSettings);
         settings.setVisibility(View.VISIBLE);
         Button tryRec = (Button) view.findViewById(R.id.tryRecon);
-        tryRec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
-            }
-        });
+        tryRec.setOnClickListener(this);
         return view;
     }
 
+    @Override
+    public void onClick(View view) {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
+    }
 }

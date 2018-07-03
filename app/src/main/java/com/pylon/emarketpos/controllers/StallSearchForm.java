@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StallSearchForm extends Fragment {
+public class StallSearchForm extends Fragment implements OnClickListener, OnItemClickListener{
     private EditText inputReq;
     private Button searchBtn;
     private ListView StallListView;
@@ -50,36 +52,35 @@ public class StallSearchForm extends Fragment {
         inputReq = (EditText) view.findViewById(R.id.StallInputData);
         searchBtn = (Button) view.findViewById(R.id.StallSearchBtn);
         StallListView = (ListView) view.findViewById(R.id.StallList);
-        searchBtn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                final String reqData = inputReq.getText().toString();
-                if(reqData.equals("")){
-                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
-                }else{
-                    new SearchData(getContext()).execute(reqData);
-                }
-            }
-        });
-        StallListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView StallNumber = (TextView) view.findViewById(R.id.List_StallNum);
-                TextView OwnerName = (TextView) view.findViewById(R.id.List_Name);
-                TextView BusinessType = (TextView) view.findViewById(R.id.List_Business);
-                TextView CustID = (TextView) view.findViewById(R.id.List_CustomerID_S);
-                StallPrintForm stallPrintForm = new StallPrintForm();
-                Bundle x = new Bundle();
-                x.putString("StallNumber",StallNumber.getText().toString());
-                x.putString("OwnerName",OwnerName.getText().toString());
-                x.putString("BusinessType",BusinessType.getText().toString());
-                x.putString("CustomerID",CustID.getText().toString());
-                stallPrintForm.setArguments(x);
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
-            }
-        });
+        searchBtn.setOnClickListener(this);
+        StallListView.setOnItemClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        final String reqData = inputReq.getText().toString();
+        if(reqData.equals("")){
+            Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
+        }else{
+            new SearchData(getContext()).execute(reqData);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        TextView StallNumber = (TextView) view.findViewById(R.id.List_StallNum);
+        TextView OwnerName = (TextView) view.findViewById(R.id.List_Name);
+        TextView BusinessType = (TextView) view.findViewById(R.id.List_Business);
+        TextView CustID = (TextView) view.findViewById(R.id.List_CustomerID_S);
+        StallPrintForm stallPrintForm = new StallPrintForm();
+        Bundle x = new Bundle();
+        x.putString("StallNumber",StallNumber.getText().toString());
+        x.putString("OwnerName",OwnerName.getText().toString());
+        x.putString("BusinessType",BusinessType.getText().toString());
+        x.putString("CustomerID",CustID.getText().toString());
+        stallPrintForm.setArguments(x);
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
     }
 
     private class SearchData extends AsyncTask<String,String,String> {

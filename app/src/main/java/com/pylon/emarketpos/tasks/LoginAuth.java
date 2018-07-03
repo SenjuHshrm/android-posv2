@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 
-public class LoginAuth extends AsyncTask<String,String,String> {
+public class LoginAuth extends AsyncTask<String,Void,String> {
     private Context mContext;
     private Fragment mFrag;
     private URL url;

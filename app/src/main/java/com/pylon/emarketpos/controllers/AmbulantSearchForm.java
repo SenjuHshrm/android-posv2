@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -34,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AmbulantSearchForm extends Fragment{
+public class AmbulantSearchForm extends Fragment implements OnClickListener, OnItemClickListener{
     private EditText inputReq;
     private Button searchBtn;
     private ListView AmbListView;
@@ -48,34 +50,33 @@ public class AmbulantSearchForm extends Fragment{
         inputReq = (EditText) view.findViewById(R.id.AmbInputData);
         searchBtn = (Button) view.findViewById(R.id.AmbSearchBtn);
         AmbListView = (ListView) view.findViewById(R.id.AmbulantList);
-        searchBtn.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                final String reqData = inputReq.getText().toString();
-                if(reqData.equals("")){
-                    Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
-                }else{
-                    new SearchData(getContext()).execute(reqData);
-                }
-            }
-        });
-        AmbListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView AmbOwner = (TextView) view.findViewById(R.id.List_AmbOwner);
-                TextView AmbBusiness = (TextView) view.findViewById(R.id.List_AmbBusiness);
-                TextView ID = (TextView) view.findViewById(R.id.List_CustomerID_A);
-                AmbulantPrintForm ambPrintForm = new AmbulantPrintForm();
-                Bundle x = new Bundle();
-                x.putString("AmbOwner",AmbOwner.getText().toString());
-                x.putString("AmbBusiness",AmbBusiness.getText().toString());
-                x.putString("CustomerID", ID.getText().toString());
-                ambPrintForm.setArguments(x);
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
-            }
-        });
+        searchBtn.setOnClickListener(this);
+        AmbListView.setOnItemClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        final String reqData = inputReq.getText().toString();
+        if(reqData.equals("")){
+            Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
+        }else{
+            new SearchData(getContext()).execute(reqData);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        TextView AmbOwner = (TextView) view.findViewById(R.id.List_AmbOwner);
+        TextView AmbBusiness = (TextView) view.findViewById(R.id.List_AmbBusiness);
+        TextView ID = (TextView) view.findViewById(R.id.List_CustomerID_A);
+        AmbulantPrintForm ambPrintForm = new AmbulantPrintForm();
+        Bundle x = new Bundle();
+        x.putString("AmbOwner",AmbOwner.getText().toString());
+        x.putString("AmbBusiness",AmbBusiness.getText().toString());
+        x.putString("CustomerID", ID.getText().toString());
+        ambPrintForm.setArguments(x);
+        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
     }
 
     private class SearchData extends AsyncTask<String,String,String> {

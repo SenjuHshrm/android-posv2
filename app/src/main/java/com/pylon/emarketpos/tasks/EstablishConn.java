@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class EstablishConn extends AsyncTask<Void,String,String> {
+public class EstablishConn extends AsyncTask<Void,Void,String> {
     private DatabaseHelper dbHelper;
     private Bundle instance;
     private Context mContext;

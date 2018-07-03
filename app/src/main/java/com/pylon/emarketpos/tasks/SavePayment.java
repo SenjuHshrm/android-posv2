@@ -18,7 +18,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class SavePayment extends AsyncTask<String,String,String> {
+public class SavePayment extends AsyncTask<String,Void,String> {
     private ProgressDialog pLoading;
     private Context mContext;
     private Fragment mFrag;
