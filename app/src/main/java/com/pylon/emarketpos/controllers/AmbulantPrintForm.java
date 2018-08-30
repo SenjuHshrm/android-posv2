@@ -1,12 +1,14 @@
 package com.pylon.emarketpos.controllers;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
     private Button ambPrint;
     private String[] SendInfo;
     private String CustID;
+    private InputMethodManager imm;
     public AmbulantPrintForm() {
 
     }
@@ -33,9 +36,12 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
         Business = (EditText) view.findViewById(R.id.Print_Business);
         Amount = (EditText) view.findViewById(R.id.Print_Amount);
         ambPrint = (Button) view.findViewById(R.id.btnPrintAmb);
+        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         OwnerName.setText(x.getString("AmbOwner"));
         Business.setText(x.getString("AmbBusiness"));
         CustID = x.getString("CustomerID");
+        Amount.requestFocus();
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         ambPrint.setOnClickListener(this);
         return view;
     }
