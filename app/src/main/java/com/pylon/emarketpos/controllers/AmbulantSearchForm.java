@@ -3,6 +3,7 @@ package com.pylon.emarketpos.controllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -161,7 +162,17 @@ public class AmbulantSearchForm extends Fragment implements OnClickListener, OnI
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"Data not found.",Toast.LENGTH_SHORT).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat", "ID"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness, R.id.List_CustomerID_A});
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat", "ID"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness, R.id.List_CustomerID_A}){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+
+                    View view = super.getView(position, convertView, parent);
+                    if(position % 2 == 0){
+                        view.setBackgroundColor(Color.parseColor("#0085b7"));
+                    }
+                    return view;
+                }
+            };
             AmbListView.setAdapter(adapter);
         }
         private String getIp(){

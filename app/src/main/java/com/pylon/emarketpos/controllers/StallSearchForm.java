@@ -3,6 +3,7 @@ package com.pylon.emarketpos.controllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -157,7 +158,17 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"Data not found.",Toast.LENGTH_SHORT).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business","CustomerID"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business,R.id.List_CustomerID_S});
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_stall,new String[]{"StallNum","Tenant","Business","CustomerID"},new int[]{R.id.List_StallNum,R.id.List_Name,R.id.List_Business,R.id.List_CustomerID_S}){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+
+                    View view = super.getView(position, convertView, parent);
+                    if(position % 2 == 0){
+                        view.setBackgroundColor(Color.parseColor("#0085b7"));
+                    }
+                    return view;
+                }
+            };
             StallListView.setAdapter(adapter);
         }
         private String getIp(){
