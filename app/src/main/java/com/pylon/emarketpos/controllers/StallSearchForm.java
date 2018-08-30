@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
     private EditText inputReq;
     private Button searchBtn;
     private ListView StallListView;
-
+    private InputMethodManager imm;
     public StallSearchForm() {
 
     }
@@ -55,12 +56,14 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
         StallListView = (ListView) view.findViewById(R.id.StallList);
         searchBtn.setOnClickListener(this);
         StallListView.setOnItemClickListener(this);
+        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         return view;
     }
 
     @Override
     public void onClick(View view) {
         final String reqData = inputReq.getText().toString();
+        imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         if(reqData.equals("")){
             Toast.makeText(getActivity(),"Text field empty.",Toast.LENGTH_SHORT).show();
         }else{
