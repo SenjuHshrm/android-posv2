@@ -55,10 +55,10 @@ public class PrintReceipt {
             String printInfo = "\n" +
                     "Owner Name: " + RecInfo[1] + "\n" +
                     "Nature of Business: " + RecInfo[2] + "\n" +
-                    "Amount to Pay: P " + RecInfo[3] + "\n" +
+                    "Amount paid: P " + RecInfo[3] + "\n" +
                     divider + "\n" +
-                    "Date: " + getDateTime() + "\n" +
-                    "Transaction Number: " + TransactNum + "\n" +
+                    "Date: " + getDateTime() + " / " + getTime() + "\n" +
+                    "Acknowledgement Receipt No.: \n" + " " + TransactNum + "\n" +
                     "Collector: " + RecInfo[4] + "\n" +
                     feedLine;
             IntentPrint(Type, printInfo);
@@ -68,10 +68,10 @@ public class PrintReceipt {
                     "Stall Number: " + RecInfo[1] + "\n" +
                     "Owner Name: " + RecInfo[6] + "\n" +
                     "Business: " + RecInfo[2] + "\n" +
-                    "Amount to Pay: P " + RecInfo[3] + "\n" +
+                    "Amount paid: P " + RecInfo[3] + "\n" +
                     divider  + "\n" +
-                    "Date: " + getDateTime() + "\n" +
-                    "Transaction Number: " + TransactNum + "\n" +
+                    "Date: " + getDateTime() + " / " + getTime() + "\n" +
+                    "Acknowledgement Receipt No.: \n" + " " + TransactNum + "\n" +
                     "Collector: " + RecInfo[4] + "\n" +
                     feedLine;
             IntentPrint(Type, printInfo);
@@ -196,5 +196,10 @@ public class PrintReceipt {
         SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy");
         String formattedDate = df.format(c);
         return formattedDate;
+    }
+    private String getTime(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        return df.format(c);
     }
 }
