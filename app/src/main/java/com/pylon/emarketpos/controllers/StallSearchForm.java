@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,8 +108,9 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
         protected String doInBackground(String... strings) {
             String xhrRes;
             String ip_host = "http://" + getIp();
-            ip_host = ip_host + "/get-info/stall/" + strings[0];
+
             try{
+                ip_host = ip_host + "/get-info/stall/" + URLEncoder.encode(strings[0], "UTF-8");
                 url = new URL(ip_host);
                 conn = (HttpURLConnection)url.openConnection();
                 conn.setReadTimeout(10000);

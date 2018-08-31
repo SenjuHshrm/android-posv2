@@ -93,6 +93,8 @@ public class SavePayment extends AsyncTask<String,Void,String> {
                     StRes.append(line);
                 }
                 xhrRes = StRes.toString();
+            } else {
+                xhrRes = "conErr";
             }
         }catch(Exception e){
             xhrRes = "conErr";
