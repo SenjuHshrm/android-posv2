@@ -57,7 +57,7 @@ public class PrintReceipt {
                     "Nature of Business: " + RecInfo[2] + "\n" +
                     "Amount paid: P " + RecInfo[3] + "\n" +
                     divider + "\n" +
-                    "Date: " + getDateTime() + " / " + getTime() + "\n" +
+                    "Date: \n " + getDateTime() + " / " + getTime() + "\n" +
                     "Acknowledgement Receipt No.: \n" + " " + TransactNum + "\n" +
                     "Collector: " + RecInfo[4] + "\n" +
                     feedLine;
@@ -70,7 +70,7 @@ public class PrintReceipt {
                     "Business: " + RecInfo[2] + "\n" +
                     "Amount paid: P " + RecInfo[3] + "\n" +
                     divider  + "\n" +
-                    "Date: " + getDateTime() + " / " + getTime() + "\n" +
+                    "Date: \n " + getDateTime() + " / " + getTime() + "\n" +
                     "Acknowledgement Receipt No.: \n" + " " + TransactNum + "\n" +
                     "Collector: " + RecInfo[4] + "\n" +
                     feedLine;
@@ -199,7 +199,7 @@ public class PrintReceipt {
     }
     private String getTime(){
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat df = new SimpleDateFormat("hh:mm aa");
         return df.format(c);
     }
 }
