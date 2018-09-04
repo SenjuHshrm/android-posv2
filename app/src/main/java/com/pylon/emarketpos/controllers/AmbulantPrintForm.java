@@ -56,11 +56,12 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
         final String pAmount = Amount.getText().toString();
         SendInfo = new String[10];
         SendInfo[0] = "ambulant";
-        SendInfo[1] = pOwnerName;
-        SendInfo[2] = pBusiness;
-        SendInfo[3] = pAmount;
-        SendInfo[4] = DevUser.getText().toString();
-        SendInfo[5] = CustID;
+        SendInfo[1] = SEARCH_DATA;
+        SendInfo[2] = pOwnerName;
+        SendInfo[3] = pBusiness;
+        SendInfo[4] = pAmount;
+        SendInfo[5] = DevUser.getText().toString();
+        SendInfo[6] = CustID;
         new SavePayment(getContext(),this).execute(SendInfo);
     }
 }

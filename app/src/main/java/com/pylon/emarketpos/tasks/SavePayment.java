@@ -29,6 +29,7 @@ public class SavePayment extends AsyncTask<String,Void,String> {
     private JSONObject jsonObj;
     private OutputStream os;
     private InputStream is;
+    private String DATA_SEARCH;
     DatabaseHelper dbHelp;
     public SavePayment(Context context, Fragment fragment){
         this.mContext = context;
@@ -51,6 +52,7 @@ public class SavePayment extends AsyncTask<String,Void,String> {
         for(int i = 0; i < param.length; i++){
             RecInfo[i] = param[i];
         }
+        DATA_SEARCH = param[1];
         try{
             dbHelp = new DatabaseHelper(mFrag.getActivity());
             url = new URL(ip_host);
@@ -63,10 +65,10 @@ public class SavePayment extends AsyncTask<String,Void,String> {
                     jsonObj.put("CustomerID",param[5]);
                     break;
                 case "ambulant":
-                    jsonObj.put("Payment",param[3]);
+                    jsonObj.put("Payment",param[4]);
                     jsonObj.put("CollectorID",dbHelp.getID());
-                    jsonObj.put("CollectorName",param[4]);
-                    jsonObj.put("CustomerID",param[5]);
+                    jsonObj.put("CollectorName",param[5]);
+                    jsonObj.put("CustomerID",param[6]);
                     break;
             }
             RequestData = jsonObj.toString();
@@ -113,10 +115,12 @@ public class SavePayment extends AsyncTask<String,Void,String> {
             new PrintReceipt(mContext).PrintReceiptPrep(TrnsType,RecInfo,res);
             switch(TrnsType){
                 case "stall":
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                    StallSearchForm ssf = StallSearchForm.newInstance(DATA_SEARCH);
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, ssf, "StallSearch").commit();
                     break;
                 case "ambulant":
-                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, new AmbulantSearchForm(), "AmbulantSearch").commit();
+                    AmbulantSearchForm asd = AmbulantSearchForm.newInstance(DATA_SEARCH);
+                    mFrag.getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in,R.anim.fade_out).replace(R.id.fragment_container, asd, "AmbulantSearch").commit();
                     break;
             }
         }

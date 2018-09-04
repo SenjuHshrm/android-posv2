@@ -53,13 +53,13 @@ public class PrintReceipt {
         if(type.equalsIgnoreCase("ambulant")){
             String Type = "Ambulant Payment";
             String printInfo = "\n" +
-                    "Owner Name: " + RecInfo[1] + "\n" +
-                    "Nature of Business: " + RecInfo[2] + "\n" +
-                    "Amount paid: P " + RecInfo[3] + "\n" +
+                    "Owner Name: " + RecInfo[2] + "\n" +
+                    "Nature of Business: " + RecInfo[3] + "\n" +
+                    "Amount paid: P " + RecInfo[4] + "\n" +
                     divider + "\n" +
                     "Date: \n " + getDateTime() + " / " + getTime() + "\n" +
                     "Acknowledgement Receipt No.: \n" + " " + TransactNum + "\n" +
-                    "Collector: " + RecInfo[4] + "\n" +
+                    "Collector: " + RecInfo[5] + "\n" +
                     feedLine;
             IntentPrint(Type, printInfo);
         }else{
