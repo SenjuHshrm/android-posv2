@@ -44,15 +44,30 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
     private Button searchBtn;
     private ListView StallListView;
     private InputMethodManager imm;
-    public StallSearchForm() {
+    private String TXT_SEARCH;
 
+    public static StallSearchForm newInstance(String searched){
+        StallSearchForm ssf = new StallSearchForm();
+        Bundle args = new Bundle();
+        args.putString("SEARCH_DATA", searched);
+        ssf.setArguments(args);
+        return ssf;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stall_search_form, container, false);
+        if(getArguments() != null){
+            TXT_SEARCH = getArguments().getString("SEARCH_DATA");
+            if(!TXT_SEARCH.isEmpty()){
+                new SearchData(getContext()).execute(TXT_SEARCH);
+            }
+        } else {
+            Toast.makeText(getContext(),"Null argument",Toast.LENGTH_SHORT).show();
+        }
         inputReq = (EditText) view.findViewById(R.id.StallInputData);
+        inputReq.setText(TXT_SEARCH);
         searchBtn = (Button) view.findViewById(R.id.StallSearchBtn);
         StallListView = (ListView) view.findViewById(R.id.StallList);
         searchBtn.setOnClickListener(this);
@@ -74,6 +89,7 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        EditText inputText = (EditText) getActivity().findViewById(R.id.StallInputData);
         TextView StallNumber = (TextView) view.findViewById(R.id.List_StallNum);
         TextView OwnerName = (TextView) view.findViewById(R.id.List_Name);
         TextView BusinessType = (TextView) view.findViewById(R.id.List_Business);
@@ -84,6 +100,7 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
         x.putString("OwnerName",OwnerName.getText().toString());
         x.putString("BusinessType",BusinessType.getText().toString());
         x.putString("CustomerID",CustID.getText().toString());
+        x.putString("DATA_SEARCH", inputText.getText().toString());
         stallPrintForm.setArguments(x);
         getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
     }

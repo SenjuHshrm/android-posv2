@@ -22,6 +22,7 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
     private String[] SendInfo;
     private String CustID;
     private InputMethodManager imm;
+    public static String SEARCH_DATA;
     public AmbulantPrintForm() {
 
     }
@@ -40,6 +41,7 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
         OwnerName.setText(x.getString("AmbOwner"));
         Business.setText(x.getString("AmbBusiness"));
         CustID = x.getString("CustomerID");
+        SEARCH_DATA = x.getString("DATA_SEARCH");
         Amount.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         ambPrint.setOnClickListener(this);

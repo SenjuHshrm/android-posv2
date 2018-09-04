@@ -40,11 +40,13 @@ public class MainApp extends Fragment implements OnClickListener{
         switch(view.getId()){
             case R.id.StallColl:
                 txtStat.setText(R.string.lblStall);
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,new StallSearchForm(),"StallSearch").commit();
+                StallSearchForm ssf = StallSearchForm.newInstance("");
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container, ssf,"StallSearch").commit();
                 break;
             case R.id.AmbulantColl:
                 txtStat.setText(R.string.lblAmb);
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,new AmbulantSearchForm(),"AmbulantSearch").commit();
+                AmbulantSearchForm asf = AmbulantSearchForm.newInstance("");
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container, asf,"AmbulantSearch").commit();
                 break;
         }
     }

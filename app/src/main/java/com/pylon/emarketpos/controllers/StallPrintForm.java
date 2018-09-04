@@ -22,10 +22,10 @@ public class StallPrintForm extends Fragment implements OnClickListener{
     private String[] SendInfo;
     private String CustID;
     private InputMethodManager imm;
+    public static String SEARCH_DATA;
     public StallPrintForm() {
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class StallPrintForm extends Fragment implements OnClickListener{
         OwnerName.setText(x.getString("OwnerName"));
         BusinessType.setText(x.getString("BusinessType"));
         CustID = x.getString("CustomerID");
+        SEARCH_DATA = x.getString("DATA_SEARCH");
         Amount.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         stallPrint.setOnClickListener(this);

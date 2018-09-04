@@ -69,11 +69,16 @@ public class MainView extends AppCompatActivity{
                 pageStat.setText(R.string.toolbarTitleMenu);
                 break;
             case "StallPrint":
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new StallSearchForm(), "StallSearch").commit();
+                //
+                String stArg = StallPrintForm.SEARCH_DATA;
+                StallSearchForm ssf = StallSearchForm.newInstance(stArg);
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, ssf , "StallSearch").commit();
                 pageStat.setText(R.string.lblStallList);
                 break;
             case "AmbulantPrint":
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, new AmbulantSearchForm(),"AmbulantSearch").commit();
+                String ambArg = AmbulantPrintForm.SEARCH_DATA;
+                AmbulantSearchForm asf = AmbulantSearchForm.newInstance(ambArg);
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, asf,"AmbulantSearch").commit();
                 pageStat.setText(R.string.lblAmbList);
                 break;
             case "LoginForm":

@@ -43,14 +43,28 @@ public class AmbulantSearchForm extends Fragment implements OnClickListener, OnI
     private Button searchBtn;
     private ListView AmbListView;
     private InputMethodManager imm;
-    public AmbulantSearchForm() {
+    private String TXT_SEARCH;
 
+    public static AmbulantSearchForm newInstance(String searched){
+        AmbulantSearchForm asf = new AmbulantSearchForm();
+        Bundle args = new Bundle();
+        args.putString("SEARCH_DATA", searched);
+        asf.setArguments(args);
+        return asf;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_ambulant_search_form, container, false);
+        if(getArguments() != null){
+            TXT_SEARCH = getArguments().getString("SEARCH_DATA");
+            if(!TXT_SEARCH.isEmpty()){
+                new SearchData(getContext()).execute(TXT_SEARCH);
+            }
+        }
         inputReq = (EditText) view.findViewById(R.id.AmbInputData);
+        inputReq.setText(TXT_SEARCH);
         searchBtn = (Button) view.findViewById(R.id.AmbSearchBtn);
         AmbListView = (ListView) view.findViewById(R.id.AmbulantList);
         searchBtn.setOnClickListener(this);
@@ -72,6 +86,7 @@ public class AmbulantSearchForm extends Fragment implements OnClickListener, OnI
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        EditText inputText = (EditText) getActivity().findViewById(R.id.AmbInputData);
         TextView AmbOwner = (TextView) view.findViewById(R.id.List_AmbOwner);
         TextView AmbBusiness = (TextView) view.findViewById(R.id.List_AmbBusiness);
         TextView ID = (TextView) view.findViewById(R.id.List_CustomerID_A);
@@ -80,6 +95,7 @@ public class AmbulantSearchForm extends Fragment implements OnClickListener, OnI
         x.putString("AmbOwner",AmbOwner.getText().toString());
         x.putString("AmbBusiness",AmbBusiness.getText().toString());
         x.putString("CustomerID", ID.getText().toString());
+        x.putString("DATA_SEARCH", inputText.getText().toString());
         ambPrintForm.setArguments(x);
         getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,ambPrintForm,"AmbulantPrint").commit();
     }
