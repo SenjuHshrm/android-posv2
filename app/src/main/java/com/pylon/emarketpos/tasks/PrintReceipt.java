@@ -139,7 +139,7 @@ public class PrintReceipt {
     }
     private void beginListenForData(){
         try{
-            final Handler handler = new Handler();
+            //final Handler handler = new Handler();
             final byte delimiter = 10;
             stopWorker = false;
             readBufferPos = 0;
@@ -161,13 +161,13 @@ public class PrintReceipt {
                                                 encodedBytes,0,
                                                 encodedBytes.length
                                         );
-                                        final String data = new String(encodedBytes,"US-ASCII");
-                                        readBufferPos = 0;
-                                        handler.post(new Runnable(){
-                                            public void run(){
-                                                Log.d("e",data);
-                                            }
-                                        });
+//                                        final String data = new String(encodedBytes,"US-ASCII");
+//                                        readBufferPos = 0;
+//                                        handler.post(new Runnable(){
+//                                            public void run(){
+//                                                Log.d("e",data);
+//                                            }
+//                                        });
                                     }else{
                                         readBuffer[readBufferPos++] = b;
                                     }

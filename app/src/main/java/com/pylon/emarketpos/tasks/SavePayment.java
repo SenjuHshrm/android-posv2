@@ -107,7 +107,6 @@ public class SavePayment extends AsyncTask<String,Void,String> {
     @Override
     public void onPostExecute(String res){
         pLoading.dismiss();
-        Log.d("Response", res);
         if(res.equalsIgnoreCase("false") ||
                 res.equalsIgnoreCase("conErr")){
             Toast.makeText(mContext,"There was an error connecting to server.",Toast.LENGTH_SHORT).show();

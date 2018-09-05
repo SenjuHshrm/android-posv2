@@ -77,7 +77,6 @@ public class LoginAuth extends AsyncTask<String,Void,String> {
                 String line;
                 while((line = reader.readLine()) != null){
                     StrRes.append(line);
-                    Log.d("Response Data",line);
                 }
                 xhrRes = StrRes.toString();
             }else{
