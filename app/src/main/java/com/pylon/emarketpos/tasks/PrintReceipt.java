@@ -85,9 +85,8 @@ public class PrintReceipt {
             assetInStream = null;
             assetInStream = mContext.getAssets().open("SPCLOGO-print.png");
             bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(assetInStream),150, 150, true);
-            Bitmap finalBitmap = bmpPadding(bitmap, 122);
             assetInStream.close();
-            byte[] comm = Utils.decodeBitmap(finalBitmap);
+            byte[] comm = Utils.decodeBitmap(bitmap);
             writeWithFormat(comm, new Formatter().get(), Formatter.rightAlign());
             writeWithFormat(header1.getBytes(), new Formatter().get(), Formatter.centerAlign());
             writeWithFormat(header2.getBytes(), new Formatter().get(), Formatter.centerAlign());
@@ -161,13 +160,6 @@ public class PrintReceipt {
                                                 encodedBytes,0,
                                                 encodedBytes.length
                                         );
-//                                        final String data = new String(encodedBytes,"US-ASCII");
-//                                        readBufferPos = 0;
-//                                        handler.post(new Runnable(){
-//                                            public void run(){
-//                                                Log.d("e",data);
-//                                            }
-//                                        });
                                     }else{
                                         readBuffer[readBufferPos++] = b;
                                     }
@@ -203,12 +195,5 @@ public class PrintReceipt {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("hh:mm aa");
         return df.format(c);
-    }
-    private Bitmap bmpPadding(Bitmap Src, int padding_X){
-        Bitmap output = Bitmap.createBitmap(Src.getWidth() + padding_X, Src.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas cn = new Canvas(output);
-        cn.drawARGB(1,255,255,255);
-        cn.drawBitmap(Src, padding_X, 0, null);
-        return output;
     }
 }
