@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.widget.Toast;
 import android.content.Intent;
 import android.os.Handler;
@@ -84,9 +85,10 @@ public class PrintReceipt {
             assetInStream = null;
             assetInStream = mContext.getAssets().open("SPCLOGO-print.png");
             bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeStream(assetInStream),150, 150, true);
+            Bitmap finalBitmap = bmpPadding(bitmap, 122);
             assetInStream.close();
-            byte[] comm = Utils.decodeBitmap(bitmap);
-            writeWithFormat(comm, new Formatter().get(), Formatter.centerAlign());
+            byte[] comm = Utils.decodeBitmap(finalBitmap);
+            writeWithFormat(comm, new Formatter().get(), Formatter.rightAlign());
             writeWithFormat(header1.getBytes(), new Formatter().get(), Formatter.centerAlign());
             writeWithFormat(header2.getBytes(), new Formatter().get(), Formatter.centerAlign());
             writeWithFormat(header3.getBytes(), new Formatter().get(), Formatter.centerAlign());
@@ -201,5 +203,12 @@ public class PrintReceipt {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("hh:mm aa");
         return df.format(c);
+    }
+    private Bitmap bmpPadding(Bitmap Src, int padding_X){
+        Bitmap output = Bitmap.createBitmap(Src.getWidth() + padding_X, Src.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas cn = new Canvas(output);
+        cn.drawARGB(1,255,255,255);
+        cn.drawBitmap(Src, padding_X, 0, null);
+        return output;
     }
 }
