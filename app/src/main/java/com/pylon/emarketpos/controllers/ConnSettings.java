@@ -39,7 +39,7 @@ public class ConnSettings extends Fragment implements OnClickListener {
             DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
             boolean res = dbHelp.saveIP(ipAdd);
             if(res){
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection(), "TestConn").commit();
             }else{
                 Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_SHORT).show();
             }

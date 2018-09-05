@@ -65,8 +65,6 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
             if(!TXT_SEARCH.isEmpty()){
                 new SearchData(getContext()).execute(TXT_SEARCH);
             }
-        } else {
-            Toast.makeText(getContext(),"Null argument",Toast.LENGTH_SHORT).show();
         }
         inputReq = (EditText) view.findViewById(R.id.StallInputData);
         inputReq.setText(TXT_SEARCH);

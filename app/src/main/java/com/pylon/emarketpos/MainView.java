@@ -26,7 +26,7 @@ public class MainView extends AppCompatActivity{
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new ConnSettings(), "SetupConnStart").commit();
             pageStat.setText("SETTINGS");
         }else{
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CheckConnection(), "CheckConn").commit();
         }
     }
     public void OpenSettings(View view){
@@ -89,6 +89,12 @@ public class MainView extends AppCompatActivity{
                 break;
             case "SetupConnStart":
                 this.finish();
+                break;
+            case "CheckConn":
+                this.finish();
+                break;
+            case "TestConn":
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
                 break;
             case "SetupConnMod":
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
