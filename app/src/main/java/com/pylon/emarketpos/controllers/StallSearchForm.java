@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class StallSearchForm extends Fragment implements OnClickListener, OnItemClickListener{
+public class StallSearchForm extends Fragment implements OnClickListener, OnItemClickListener, TextWatcher{
     private EditText inputReq;
     private Button searchBtn;
     private ListView StallListView;
@@ -68,6 +70,7 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
         }
         inputReq = (EditText) view.findViewById(R.id.StallInputData);
         inputReq.setText(TXT_SEARCH);
+        inputReq.addTextChangedListener(this);
         searchBtn = (Button) view.findViewById(R.id.StallSearchBtn);
         StallListView = (ListView) view.findViewById(R.id.StallList);
         searchBtn.setOnClickListener(this);
@@ -103,6 +106,23 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
         x.putString("DATA_SEARCH", inputText.getText().toString());
         stallPrintForm.setArguments(x);
         getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container,stallPrintForm,"StallPrint").commit();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if(charSequence.length() == 0){
+            StallListView.setAdapter(null);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 
     private class SearchData extends AsyncTask<String,String,String> {
