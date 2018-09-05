@@ -64,6 +64,7 @@ public class StallPrintForm extends Fragment implements OnClickListener{
         SendInfo[4] = DevUser.getText().toString();
         SendInfo[5] = CustID;
         SendInfo[6] = pOwnerName;
+        SendInfo[7] = SEARCH_DATA;
         if(pAmount.isEmpty()){
             Toast.makeText(getContext(), "Amount cannot be empty", Toast.LENGTH_SHORT).show();
         } else {

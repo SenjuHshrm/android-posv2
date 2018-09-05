@@ -52,7 +52,6 @@ public class SavePayment extends AsyncTask<String,Void,String> {
         for(int i = 0; i < param.length; i++){
             RecInfo[i] = param[i];
         }
-        DATA_SEARCH = param[1];
         try{
             dbHelp = new DatabaseHelper(mFrag.getActivity());
             url = new URL(ip_host);
@@ -63,12 +62,14 @@ public class SavePayment extends AsyncTask<String,Void,String> {
                     jsonObj.put("CollectorID",dbHelp.getID());
                     jsonObj.put("CollectorName", param[4]);
                     jsonObj.put("CustomerID",param[5]);
+                    DATA_SEARCH = param[7];
                     break;
                 case "ambulant":
                     jsonObj.put("Payment",param[4]);
                     jsonObj.put("CollectorID",dbHelp.getID());
                     jsonObj.put("CollectorName",param[5]);
                     jsonObj.put("CustomerID",param[6]);
+                    DATA_SEARCH = param[1];
                     break;
             }
             RequestData = jsonObj.toString();
