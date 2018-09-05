@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.SavePayment;
@@ -62,6 +63,10 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
         SendInfo[4] = pAmount;
         SendInfo[5] = DevUser.getText().toString();
         SendInfo[6] = CustID;
-        new SavePayment(getContext(),this).execute(SendInfo);
+        if(pAmount.isEmpty()){
+            Toast.makeText(getContext(), "Amount cannot be empty", Toast.LENGTH_SHORT).show();
+        } else {
+            new SavePayment(getContext(), this).execute(SendInfo);
+        }
     }
 }
