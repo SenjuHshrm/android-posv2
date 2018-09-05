@@ -16,6 +16,8 @@ import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
 
 public class ConnSettings extends Fragment implements OnClickListener {
+    private DatabaseHelper dbHelper;
+    private EditText GetIPAdd;
     public ConnSettings() {
 
     }
@@ -23,6 +25,10 @@ public class ConnSettings extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_conn_settings, container, false);
+        dbHelper = new DatabaseHelper(getContext());
+        String ip = dbHelper.selectIP();
+        GetIPAdd = (EditText) view.findViewById(R.id.SetIP);
+        GetIPAdd.setText(ip);
         Button saveSettings = (Button) view.findViewById(R.id.btnSaveSett);
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
         settBtn.setVisibility(View.INVISIBLE);
@@ -31,7 +37,7 @@ public class ConnSettings extends Fragment implements OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        EditText GetIPAdd = (EditText) getActivity().findViewById(R.id.SetIP);
+        GetIPAdd = (EditText) getActivity().findViewById(R.id.SetIP);
         String ipAdd = GetIPAdd.getText().toString();
         if(ipAdd.isEmpty()){
             Toast.makeText(getActivity(), "Empty input field.", Toast.LENGTH_SHORT).show();
