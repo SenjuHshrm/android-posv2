@@ -100,6 +100,10 @@ public class MainView extends AppCompatActivity{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection()).commit();
                 pageStat.setText("");
                 break;
+            case "RegAmbulant":
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.fragment_container, new MainApp(), "MainApp").commit();
+                pageStat.setText(R.string.toolbarTitleMenu);
+                break;
 
         }
 

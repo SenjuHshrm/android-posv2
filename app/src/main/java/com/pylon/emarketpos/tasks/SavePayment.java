@@ -102,6 +102,8 @@ public class SavePayment extends AsyncTask<String,Void,String> {
         }catch(Exception e){
             xhrRes = "conErr";
             e.printStackTrace();
+        } finally{
+            conn.disconnect();
         }
         return xhrRes;
     }

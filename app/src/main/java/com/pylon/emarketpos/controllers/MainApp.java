@@ -16,7 +16,7 @@ import com.pylon.emarketpos.R;
 public class MainApp extends Fragment implements OnClickListener{
     public MainApp() {
     }
-    private Button StallColl, AmbColl;
+    private Button StallColl, AmbColl, RegAmb;
     private TextView pageStat;
 
     @Override
@@ -29,8 +29,10 @@ public class MainApp extends Fragment implements OnClickListener{
         pageStat.setText(getResources().getString(R.string.toolbarTitleMenu));
         StallColl = (Button) view.findViewById(R.id.StallColl);
         AmbColl = (Button) view.findViewById(R.id.AmbulantColl);
+        RegAmb = (Button) view.findViewById(R.id.RegAmbForm);
         StallColl.setOnClickListener(this);
         AmbColl.setOnClickListener(this);
+        RegAmb.setOnClickListener(this);
         return view;
     }
 
@@ -47,6 +49,10 @@ public class MainApp extends Fragment implements OnClickListener{
                 txtStat.setText(R.string.lblAmb);
                 AmbulantSearchForm asf = AmbulantSearchForm.newInstance("");
                 getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left).replace(R.id.fragment_container, asf,"AmbulantSearch").commit();
+                break;
+            case R.id.RegAmbForm:
+                txtStat.setText("Ambulant Registration");
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.fragment_container, new RegisterAmbulant(), "RegAmbulant").commit();
                 break;
         }
     }
