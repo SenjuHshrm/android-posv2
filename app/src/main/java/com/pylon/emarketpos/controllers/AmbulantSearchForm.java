@@ -195,14 +195,15 @@ public class AmbulantSearchForm extends Fragment implements OnClickListener, OnI
                     JSONObject post = AmbList.getJSONObject(i);
                     Map<String,String> datum = new HashMap<String,String>(2);
                     datum.put("OwnerName", post.getString("Name"));
-                    datum.put("BusinessNat",post.getString("Location"));
+                    datum.put("Location",post.getString("Location"));
+                    datum.put("Business", post.getString("Business"));
                     datum.put("ID", post.getString("ID"));
                     data.add(datum);
                 }
             }catch(JSONException JSONEx){
                 Toast.makeText(mContext,"Data not found.",Toast.LENGTH_SHORT).show();
             }
-            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","BusinessNat", "ID"},new int[]{R.id.List_AmbOwner,R.id.List_AmbBusiness, R.id.List_CustomerID_A}){
+            SimpleAdapter adapter = new SimpleAdapter(mContext,data,R.layout.layout_list_view_ambulant,new String[]{"OwnerName","Location","Business", "ID"},new int[]{R.id.List_AmbOwner,R.id.List_AmbLocation, R.id.List_AmbBusiness, R.id.List_CustomerID_A}){
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent){
 

@@ -28,7 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RegisterAmbulant extends Fragment implements OnClickListener{
-    private EditText fName, mName, lName, locName, locNum;
+    private EditText fName, mName, lName, businessType, locName, locNum;
     private Button regAmb;
     private boolean isSuccess;
     public RegisterAmbulant() {
@@ -43,6 +43,7 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
         fName = (EditText) view.findViewById(R.id.firstNameIn);
         mName = (EditText) view.findViewById(R.id.middleNameIn);
         lName = (EditText) view.findViewById(R.id.lastNameIn);
+        businessType = (EditText) view.findViewById(R.id.businessIn);
         locName = (EditText) view.findViewById(R.id.locationIn);
         locNum = (EditText) view.findViewById(R.id.locationNumIn);
         regAmb = (Button) view.findViewById(R.id.btnRegAmb);
@@ -55,6 +56,7 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
         final String firstName = fName.getText().toString();
         final String middleName = mName.getText().toString();
         final String lastName = lName.getText().toString();
+        final String business = businessType.getText().toString();
         final String locationName = locName.getText().toString();
         final String locationNumber = locNum.getText().toString();
         if(firstName.isEmpty() ||
@@ -63,7 +65,7 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
            locationNumber.isEmpty()){
             Toast.makeText(getContext(), "Input all required fields.", Toast.LENGTH_SHORT).show();
         } else {
-            new RegAmbulant(getContext(), this).execute(firstName, middleName, lastName, locationName, locationNumber);
+            new RegAmbulant(getContext(), this).execute(firstName, middleName, lastName, business, locationName, locationNumber);
             if(isSuccess){
                 fName.setText("");
                 mName.setText("");
@@ -108,8 +110,9 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
                         .put("FirstName", params[0])
                         .put("MiddleName", params[1])
                         .put("LastName", params[2])
-                        .put("Location", params[3])
-                        .put("LocationNumber", params[4]);
+                        .put("BusinessType", params[3])
+                        .put("Location", params[4])
+                        .put("LocationNumber", params[5]);
                 String PostData = ambObj.toString();
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setReadTimeout(10000);
