@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
-import com.pylon.emarketpos.tasks.SavePayment;
+import com.pylon.emarketpos.tasks.*;
 
 public class StallPrintForm extends Fragment implements OnClickListener{
     private EditText StallNum, OwnerName, BusinessType, Amount;
@@ -51,7 +50,6 @@ public class StallPrintForm extends Fragment implements OnClickListener{
 
     @Override
     public void onClick(View view) {
-        TextView DevUser = (TextView) getActivity().findViewById(R.id.device_user);
         final String pStallNum = StallNum.getText().toString();
         final String pOwnerName = OwnerName.getText().toString();
         final String pBusiness = BusinessType.getText().toString();
@@ -61,7 +59,7 @@ public class StallPrintForm extends Fragment implements OnClickListener{
         SendInfo[1] = pStallNum;
         SendInfo[2] = pBusiness;
         SendInfo[3] = pAmount;
-        SendInfo[4] = DevUser.getText().toString();
+        SendInfo[4] = new DatabaseHelper(getContext()).getDeviceUser();
         SendInfo[5] = CustID;
         SendInfo[6] = pOwnerName;
         SendInfo[7] = SEARCH_DATA;

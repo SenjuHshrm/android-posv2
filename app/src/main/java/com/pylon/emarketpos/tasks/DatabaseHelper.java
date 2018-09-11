@@ -89,4 +89,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         query.close();
         return strBuilder.toString();
     }
+    public String getDeviceUser(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor query = db.rawQuery("select " + COL_1 + " from " + TABLE_NAME, null);
+        StringBuilder strBuilder = new StringBuilder();
+        while(query.moveToNext()){
+            strBuilder.append(query.getString(0));
+        }
+        query.close();
+        return strBuilder.toString();
+    }
 }

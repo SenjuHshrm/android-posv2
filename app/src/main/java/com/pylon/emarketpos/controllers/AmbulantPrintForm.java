@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
-import com.pylon.emarketpos.tasks.SavePayment;
+import com.pylon.emarketpos.tasks.*;
 
 public class AmbulantPrintForm extends Fragment implements OnClickListener{
     private EditText OwnerName, Business, Amount;
@@ -51,7 +50,6 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
 
     @Override
     public void onClick(View view) {
-        TextView DevUser = (TextView) getActivity().findViewById(R.id.device_user);
         final String pOwnerName = OwnerName.getText().toString();
         final String pBusiness = Business.getText().toString();
         final String pAmount = Amount.getText().toString();
@@ -61,7 +59,7 @@ public class AmbulantPrintForm extends Fragment implements OnClickListener{
         SendInfo[2] = pOwnerName;
         SendInfo[3] = pBusiness;
         SendInfo[4] = pAmount;
-        SendInfo[5] = DevUser.getText().toString();
+        SendInfo[5] = new DatabaseHelper(getContext()).getDeviceUser();
         SendInfo[6] = CustID;
         if(pAmount.isEmpty()){
             Toast.makeText(getContext(), "Amount cannot be empty", Toast.LENGTH_SHORT).show();
