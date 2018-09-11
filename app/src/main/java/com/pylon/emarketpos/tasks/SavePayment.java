@@ -86,6 +86,7 @@ public class SavePayment extends AsyncTask<String,Void,String> {
             os = new BufferedOutputStream(conn.getOutputStream());
             os.write(RequestData.getBytes());
             os.flush();
+            os.close();
             int response = conn.getResponseCode();
             if(response == HttpURLConnection.HTTP_OK){
                 is = conn.getInputStream();

@@ -14,10 +14,16 @@ import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
 import com.pylon.emarketpos.tasks.DatabaseHelper;
+import com.pylon.emarketpos.tasks.GetTransactions;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ConnSettings extends Fragment implements OnClickListener {
     private DatabaseHelper dbHelper;
     private EditText GetIPAdd;
+    private Button printColl, saveSettings;
     public ConnSettings() {
 
     }
@@ -29,26 +35,43 @@ public class ConnSettings extends Fragment implements OnClickListener {
         String ip = dbHelper.selectIP();
         GetIPAdd = (EditText) view.findViewById(R.id.SetIP);
         GetIPAdd.setText(ip);
-        Button saveSettings = (Button) view.findViewById(R.id.btnSaveSett);
+        saveSettings = (Button) view.findViewById(R.id.btnSaveSett);
+        printColl = (Button) view.findViewById(R.id.btnPrintCollection);
         ImageButton settBtn = (ImageButton) getActivity().findViewById(R.id.openSettings);
         settBtn.setVisibility(View.INVISIBLE);
         saveSettings.setOnClickListener(this);
+        printColl.setOnClickListener(this);
         return view;
     }
     @Override
     public void onClick(View view) {
-        GetIPAdd = (EditText) getActivity().findViewById(R.id.SetIP);
-        String ipAdd = GetIPAdd.getText().toString();
-        if(ipAdd.isEmpty()){
-            Toast.makeText(getActivity(), "Empty input field.", Toast.LENGTH_SHORT).show();
-        } else {
-            DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
-            boolean res = dbHelp.saveIP(ipAdd);
-            if(res){
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection(), "TestConn").commit();
-            }else{
-                Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_SHORT).show();
-            }
+        switch(view.getId()){
+            case R.id.btnSaveSett:
+                GetIPAdd = (EditText) getActivity().findViewById(R.id.SetIP);
+                String ipAdd = GetIPAdd.getText().toString();
+                if(ipAdd.isEmpty()){
+                    Toast.makeText(getActivity(), "Empty input field.", Toast.LENGTH_SHORT).show();
+                } else {
+                    DatabaseHelper dbHelp = new DatabaseHelper(getActivity());
+                    boolean res = dbHelp.saveIP(ipAdd);
+                    if(res){
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CheckConnection(), "TestConn").commit();
+                    }else{
+                        Toast.makeText(getActivity(),"An error occured while saving data.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            case R.id.btnPrintCollection:
+                String user = new DatabaseHelper(getContext()).getDeviceUser();
+                String currDate =getCurrDate();
+                new GetTransactions(getContext()).execute(user, currDate);
+                break;
         }
+    }
+    private String getCurrDate(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate = df.format(c);
+        return formattedDate;
     }
 }
