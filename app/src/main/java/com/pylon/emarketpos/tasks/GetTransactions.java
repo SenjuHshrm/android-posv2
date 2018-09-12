@@ -100,7 +100,7 @@ public class GetTransactions extends AsyncTask<String, Void, String> {
                 }
                 new PrintTransactions(mContext).PrintReceipt(DEV_USER, data, formatCurrency(String.valueOf(total)));
             } catch (Exception e){
-
+                Toast.makeText(mContext, "You do not have collection for this day yet.", Toast.LENGTH_SHORT).show();
             }
         }
     }
