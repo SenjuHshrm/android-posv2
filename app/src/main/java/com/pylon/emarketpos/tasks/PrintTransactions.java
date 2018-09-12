@@ -46,19 +46,15 @@ public class PrintTransactions {
     public PrintTransactions(Context ctx) {
         this.mContext = ctx;
     }
-    public void PrintReceipt(String DevUser, ArrayList<String> arraylist, double total){
+    public void PrintReceipt(String DevUser, ArrayList<String> arraylist, String total){
         int totalColl = arraylist.size();
-        StringBuilder list = new StringBuilder();
-        for(int i = 0; i < totalColl; i++){
-            list.append(arraylist.get(i)).append("\n");
-        }
         String printUser = "Collector: " + DevUser + "\n";
-        String printTotal = "Total collection: " + String.valueOf(totalColl) + "\n";
-        String printTotalAmt = "Total Amount: P " + String.valueOf(Double.valueOf(total));
-        IntentPrint(list.toString(), printUser, printTotal, printTotalAmt);
+        String printTotal = "Total stall # collected: " + String.valueOf(totalColl) + "\n";
+        String printTotalAmt = "Total collection: P " + total;
+        IntentPrint(printUser, printTotal, printTotalAmt);
 
     }
-    private void IntentPrint(String list, String user, String total, String totalAmt){
+    private void IntentPrint(String user, String total, String totalAmt){
         InitPrinter();
         try{
             assetInStream = null;
@@ -72,10 +68,8 @@ public class PrintTransactions {
             writeWithFormat(header3.getBytes(), new Formatter().get(), Formatter.centerAlign());
             writeWithFormat(header4.getBytes(), new Formatter().bold().get(), Formatter.centerAlign());
             writeWithFormat(divider.getBytes(), new Formatter().get(), Formatter.centerAlign());
-            writeWithFormat(title.getBytes(), new Formatter().get(), Formatter.centerAlign());
+            writeWithFormat(title.getBytes(), new Formatter().height().get(), Formatter.centerAlign());
             writeWithFormat(divider.getBytes(), new Formatter().get(), Formatter.centerAlign());
-            writeWithFormat("\n".getBytes(), new Formatter().get(), Formatter.rightAlign());
-            writeWithFormat(list.getBytes(), new Formatter().get(), Formatter.leftAlign());
             writeWithFormat("\n".getBytes(), new Formatter().get(), Formatter.rightAlign());
             writeWithFormat(user.getBytes(), new Formatter().get(), Formatter.leftAlign());
             writeWithFormat(getCurrDate().getBytes(), new Formatter().get(), Formatter.leftAlign());
@@ -154,6 +148,7 @@ public class PrintTransactions {
                     }
                 }
             });
+            workerThread.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,8 +164,8 @@ public class PrintTransactions {
     }
     private String getCurrDate(){
         Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy / hh:mm aa");
         String formattedDate = df.format(c);
-        return "Date: " + formattedDate + "\n";
+        return "Date: \n " + formattedDate + "\n";
     }
 }

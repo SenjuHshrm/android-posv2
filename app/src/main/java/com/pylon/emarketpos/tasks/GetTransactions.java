@@ -95,10 +95,10 @@ public class GetTransactions extends AsyncTask<String, Void, String> {
                 double total = 0.00;
                 for(int i = 0; i < jsonData.length(); i++){
                     JSONObject post = jsonData.getJSONObject(i);
-                    data.add(post.getString("Receipt") + "\t\t" + post.getString("Payments"));
+                    data.add(post.getString("Receipt") + "\t\tP " + formatCurrency(post.getString("Payments")));
                     total += Double.parseDouble(post.getString("Payments"));
                 }
-                new PrintTransactions(mContext).PrintReceipt(DEV_USER, data, total);
+                new PrintTransactions(mContext).PrintReceipt(DEV_USER, data, formatCurrency(String.valueOf(total)));
             } catch (Exception e){
 
             }
@@ -108,5 +108,32 @@ public class GetTransactions extends AsyncTask<String, Void, String> {
     private String getIP(){
         DatabaseHelper dbHelp = new DatabaseHelper(mContext);
         return dbHelp.selectIP();
+    }
+
+    private String formatCurrency(String amt){
+//        if(!amt.endsWith(".00")){
+//            return amt + ".00";
+//        } else if (amt.endsWith("[.0-9]$")){
+//            return amt + 0;
+//        }
+//        return amt;
+        String res = "";
+        double d = Double.parseDouble(amt);
+        String txt = Double.toString(Math.abs(d));
+        int intPl = txt.indexOf('.');
+        int decPl = txt.length() - intPl - 1;
+
+        if (amt.contains(".")){
+            if (decPl == 2){
+                res =  amt;
+            } else if (decPl == 1) {
+                res =  amt + "0";
+            } else if (decPl == 0) {
+                res =  amt + ".00";
+            }
+        } else {
+            res = amt + ".00";
+        }
+        return res;
     }
 }
