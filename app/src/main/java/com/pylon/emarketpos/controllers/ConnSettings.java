@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pylon.emarketpos.R;
@@ -24,6 +25,7 @@ public class ConnSettings extends Fragment implements OnClickListener {
     private DatabaseHelper dbHelper;
     private EditText GetIPAdd;
     private Button printColl, saveSettings;
+    private TextView Inst;
     public ConnSettings() {
 
     }
@@ -41,6 +43,7 @@ public class ConnSettings extends Fragment implements OnClickListener {
         settBtn.setVisibility(View.INVISIBLE);
         saveSettings.setOnClickListener(this);
         printColl.setOnClickListener(this);
+        checkAuth(view);
         return view;
     }
     @Override
@@ -73,5 +76,17 @@ public class ConnSettings extends Fragment implements OnClickListener {
         SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = df.format(c);
         return formattedDate;
+    }
+    private void checkAuth(View v){
+        printColl = (Button) v.findViewById(R.id.btnPrintCollection);
+        Inst = (TextView) v.findViewById(R.id.textView15);
+        String user = new DatabaseHelper(getContext()).getDeviceUser();
+        if(user.isEmpty()) {
+            printColl.setVisibility(View.INVISIBLE);
+            Inst.setVisibility(View.INVISIBLE);
+        } else {
+            printColl.setVisibility(View.VISIBLE);
+            Inst.setVisibility(View.VISIBLE);
+        }
     }
 }
