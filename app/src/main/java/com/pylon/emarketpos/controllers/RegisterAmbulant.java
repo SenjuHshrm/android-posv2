@@ -30,7 +30,6 @@ import java.net.URL;
 public class RegisterAmbulant extends Fragment implements OnClickListener{
     private EditText fName, mName, lName, businessType, locName, locNum;
     private Button regAmb;
-    private boolean isSuccess;
     public RegisterAmbulant() {
 
     }
@@ -66,13 +65,6 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
             Toast.makeText(getContext(), "Input all required fields.", Toast.LENGTH_SHORT).show();
         } else {
             new RegAmbulant(getContext(), this).execute(firstName, middleName, lastName, business, locationName, locationNumber);
-            if(isSuccess){
-                fName.setText("");
-                mName.setText("");
-                lName.setText("");
-                locName.setText("");
-                locNum.setText("");
-            }
         }
     }
 
@@ -153,13 +145,11 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
         protected void onPostExecute(String res){
             pLoading.dismiss();
             if(res.equalsIgnoreCase("true")){
-                isSuccess = true;
+                clearText();
                 Toast.makeText(mContext,"Successfully registered",Toast.LENGTH_SHORT).show();
             } else if(res.equalsIgnoreCase("false")) {
-                isSuccess = false;
                 Toast.makeText(mContext,"Registration was unsuccessful",Toast.LENGTH_SHORT).show();
             } else {
-                isSuccess = false;
                 Toast.makeText(mContext,"An error occured while connecting to server.",Toast.LENGTH_SHORT).show();
             }
         }
@@ -168,5 +158,13 @@ public class RegisterAmbulant extends Fragment implements OnClickListener{
             dbHelp = new DatabaseHelper(mFrag.getActivity());
             return dbHelp.selectIP();
         }
+    }
+    public void clearText() {
+        fName.setText("");
+        mName.setText("");
+        lName.setText("");
+        businessType.setText("");
+        locName.setText("");
+        locNum.setText("");
     }
 }
