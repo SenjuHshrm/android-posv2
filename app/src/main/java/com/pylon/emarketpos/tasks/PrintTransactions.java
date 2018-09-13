@@ -49,7 +49,7 @@ public class PrintTransactions {
     public void PrintReceipt(String DevUser, ArrayList<String> arraylist, String total){
         int totalColl = arraylist.size();
         String printUser = "Collector: " + DevUser + "\n";
-        String printTotal = "Total stall # collected: " + String.valueOf(totalColl) + "\n";
+        String printTotal = "Total # of stalls collected: " + String.valueOf(totalColl) + "\n";
         String printTotalAmt = "Total collection: P " + total;
         IntentPrint(printUser, printTotal, printTotalAmt);
 
