@@ -145,7 +145,7 @@ public class StallSearchForm extends Fragment implements OnClickListener, OnItem
             String ip_host = "http://" + getIp();
 
             try{
-                ip_host = ip_host + "/get-info/stall/" + URLEncoder.encode(strings[0], "UTF-8");
+                ip_host = ip_host + "/get-info/stall/" + strings[0];
                 url = new URL(ip_host);
                 conn = (HttpURLConnection)url.openConnection();
                 conn.setReadTimeout(10000);
