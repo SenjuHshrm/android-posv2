@@ -81,6 +81,9 @@ public class MainView extends AppCompatActivity{
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right).replace(R.id.fragment_container, asf,"AmbulantSearch").commit();
                 pageStat.setText(R.string.lblAmbList);
                 break;
+            case "RegUser":
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFrag(), "LoginForm").commit();
+                break;
             case "LoginForm":
                 this.finish();
                 break;

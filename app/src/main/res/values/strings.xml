@@ -33,6 +33,15 @@
     <string name="IPSample">e.g. 192.168.1.1</string>
     <string name="lblSaveSet">Save Settings</string>
     <string name="tryAgain"><a>Try Again</a></string>
+    <string name="btnCreateAcct">Create new account</string>
+    <string name="regUserLbl">Register new account</string>
+    <string name="fnameLbl">First Name</string>
+    <string name="mnameLbl">Middle Name</string>
+    <string name="lnameLbl">Last Name</string>
+    <string name="addrLbl">Address</string>
+    <string name="contactLbl">Contact no.</string>
+    <string name="btnRegLbl">Register</string>
+    <string name="lblRegUser">REGISTER USER</string>
     <item name="visible" type="id" />
     <item name="masked" type="id" />
 

@@ -9,7 +9,7 @@
 
 
     <ScrollView
-        android:layout_width="0dp"
+        android:layout_width="382dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,9 +27,9 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Ambulant Registration Form:"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
@@ -39,9 +39,9 @@
                 android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/firstNameIn"
@@ -56,9 +56,9 @@
                 android:id="@+id/middleName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/middleNameIn"
@@ -73,9 +73,9 @@
                 android:id="@+id/lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/lastNameIn"
@@ -90,9 +90,9 @@
                 android:id="@+id/business"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/businessIn"
@@ -107,9 +107,9 @@
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/locationIn"
@@ -124,9 +124,9 @@
                 android:id="@+id/locationNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp">
 
                 <EditText
                     android:id="@+id/locationNumIn"
@@ -141,9 +141,9 @@
                 android:id="@+id/btnRegAmb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
                 android:background="@color/colorAccent"
                 android:text="Register" />
         </LinearLayout>

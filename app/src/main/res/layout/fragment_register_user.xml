@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.RegisterUser">
+
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="200dp"
+        android:text="@string/regUserLbl"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fnameWrap"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/fname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/fnameLbl"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:nextFocusDown="@+id/mname"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/mnameWrap"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/mname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/mnameLbl"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lnameWrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fnameWrap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/lname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/lnameLbl"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/addrWrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lnameWrap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/addr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/addrLbl"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/contactWrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addrWrap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/contactLbl"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/usrnmWrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactWrap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/usrnm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/lblUsername"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/pswrdWrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usrnmWrap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+        <EditText
+            android:id="@+id/pswrd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/fnameWrap"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:ems="2"
+            android:hint="@string/lblPassword"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnReg"
+        style="@android:style/Widget.Material.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pswrdWrap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent"
+        android:text="@string/btnRegLbl" />
+</RelativeLayout>
